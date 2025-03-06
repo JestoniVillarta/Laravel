@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentsController;
 
 Route::get('/', function () {
     return view('Dashboard'); // Main Dashboard View
@@ -10,9 +11,7 @@ Route::get('/Attendance', function () {
     return view('Attendance'); // Documentation Page
 })->name('Attendance');
 
-Route::get('/Student', function () {
-    return view('Student'); // Documentation Page
-})->name('Student');
+Route::get('/Students', [StudentsController::class, 'Student'])->name('Students');
 
 Route::get('/Set_time', function () {
     return view('Set_time'); // Documentation Page

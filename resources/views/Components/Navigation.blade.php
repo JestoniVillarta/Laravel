@@ -141,11 +141,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 <span class="font-medium">Attendance</span>
             </a>
 
-            <a href="{{ route('Student') }}" class="flex items-center space-x-3 text-gray-600 p-2 hover:bg-gray-100 rounded-md">
+            <a href="{{ route('Students') }}" class="flex items-center space-x-3 text-gray-600 p-2 hover:bg-gray-100 rounded-md">
                 <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                <span class="font-medium">Student</span>
+                <span class="font-medium">Students</span>
             </a>
 
             <div class="text-gray-500 font-semibold mt-4 text-[13px] tracking-wide mb-1">Time settings</div>
