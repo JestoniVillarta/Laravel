@@ -27,27 +27,70 @@
             }
         });
 
-        function toggleSidebar() {
-            const sidebar = document.getElementById("sidebar");
-            const content = document.getElementById("content");
-            const toggleButton = document.getElementById("toggleButton");
-            
-            sidebar.classList.toggle("-translate-x-full");
-            
-            // Adjust content margin when sidebar is open
-            const isOpen = !sidebar.classList.contains("-translate-x-full");
-            
-            if (isOpen) {
-                content.classList.add("ml-64");
-                toggleButton.classList.add("left-64");
-            } else {
-                content.classList.remove("ml-64");
-                toggleButton.classList.remove("left-64");
-            }
-            
-            // Save the state to localStorage
-            localStorage.setItem('sidebarOpen', isOpen);
-        }
+// Function to get URL parameters
+function getUrlParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
+// Function to set URL parameters without page reload
+function setUrlParamWithoutReload(name, value) {
+    const url = new URL(window.location);
+    url.searchParams.set(name, value);
+    window.history.replaceState({}, '', url);
+}
+
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const content = document.getElementById("content");
+    const toggleButton = document.getElementById("toggleButton");
+    
+    sidebar.classList.toggle("-translate-x-full");
+    
+    // Adjust content margin when sidebar is open
+    const isOpen = !sidebar.classList.contains("-translate-x-full");
+    
+    if (isOpen) {
+        content.classList.add("ml-64");
+        toggleButton.classList.add("left-64");
+    } else {
+        content.classList.remove("ml-64");
+        toggleButton.classList.remove("left-64");
+    }
+    
+    // Instead of localStorage, use sessionStorage which is faster
+    sessionStorage.setItem('sidebarOpen', isOpen);
+    
+    // Also add a URL parameter for direct links
+    setUrlParamWithoutReload('sidebar', isOpen ? '1' : '0');
+}
+
+// When page loads, check for sidebar state
+document.addEventListener('DOMContentLoaded', function() {
+    // Try URL parameter first (for direct links)
+    let sidebarParam = getUrlParam('sidebar');
+    
+    // If not in URL, check sessionStorage
+    if (sidebarParam === null) {
+        sidebarParam = sessionStorage.getItem('sidebarOpen');
+    }
+    
+    const sidebarOpen = sidebarParam === '1' || sidebarParam === 'true';
+    const sidebar = document.getElementById("sidebar");
+    const content = document.getElementById("content");
+    const toggleButton = document.getElementById("toggleButton");
+    
+    // Apply the saved state
+    if (sidebarOpen) {
+        sidebar.classList.remove("-translate-x-full");
+        content.classList.add("ml-64");
+        toggleButton.classList.add("left-64");
+    } else {
+        sidebar.classList.add("-translate-x-full");
+        content.classList.remove("ml-64");
+        toggleButton.classList.remove("left-64");
+    }
+});
     </script>
 </head>
 
