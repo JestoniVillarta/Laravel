@@ -8,90 +8,72 @@
     @vite('resources/css/app.css')
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check localStorage for sidebar state when page loads
-            const sidebarOpen = localStorage.getItem('sidebarOpen') === 'true';
-            const sidebar = document.getElementById("sidebar");
-            const content = document.getElementById("content");
-            const toggleButton = document.getElementById("toggleButton");
-            
-            // Apply the saved state on page load
-            if (sidebarOpen) {
-                sidebar.classList.remove("-translate-x-full");
-                content.classList.add("ml-64");
-                toggleButton.classList.add("left-64");
-            } else {
-                sidebar.classList.add("-translate-x-full");
-                content.classList.remove("ml-64");
-                toggleButton.classList.remove("left-64");
-            }
-        });
+    document.addEventListener('DOMContentLoaded', function() {
+        // Try URL parameter first (for direct links)
+        let sidebarParam = getUrlParam('sidebar');
 
-// Function to get URL parameters
-function getUrlParam(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
-}
+        // If not in URL, check sessionStorage
+        if (sidebarParam === null) {
+            sidebarParam = sessionStorage.getItem('sidebarOpen');
+        }
 
-// Function to set URL parameters without page reload
-function setUrlParamWithoutReload(name, value) {
-    const url = new URL(window.location);
-    url.searchParams.set(name, value);
-    window.history.replaceState({}, '', url);
-}
+        // Default to "open" if there's no stored state
+        const sidebarOpen = sidebarParam === null || sidebarParam === '1' || sidebarParam === 'true';
+        const sidebar = document.getElementById("sidebar");
+        const content = document.getElementById("content");
+        const toggleButton = document.getElementById("toggleButton");
 
-function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-    const content = document.getElementById("content");
-    const toggleButton = document.getElementById("toggleButton");
-    
-    sidebar.classList.toggle("-translate-x-full");
-    
-    // Adjust content margin when sidebar is open
-    const isOpen = !sidebar.classList.contains("-translate-x-full");
-    
-    if (isOpen) {
-        content.classList.add("ml-64");
-        toggleButton.classList.add("left-64");
-    } else {
-        content.classList.remove("ml-64");
-        toggleButton.classList.remove("left-64");
+        // Ensure sidebar is open on first load
+        if (sidebarOpen) {
+            sidebar.classList.remove("-translate-x-full");
+            content.classList.add("ml-64");
+            toggleButton.classList.add("left-64");
+        } else {
+            sidebar.classList.add("-translate-x-full");
+            content.classList.remove("ml-64");
+            toggleButton.classList.remove("left-64");
+        }
+    });
+
+    function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const content = document.getElementById("content");
+        const toggleButton = document.getElementById("toggleButton");
+
+        sidebar.classList.toggle("-translate-x-full");
+
+        // Adjust content margin when sidebar is open
+        const isOpen = !sidebar.classList.contains("-translate-x-full");
+
+        if (isOpen) {
+            content.classList.add("ml-64");
+            toggleButton.classList.add("left-64");
+        } else {
+            content.classList.remove("ml-64");
+            toggleButton.classList.remove("left-64");
+        }
+
+        // Save state in sessionStorage
+        sessionStorage.setItem('sidebarOpen', isOpen);
+
+        // Update URL parameter
+        setUrlParamWithoutReload('sidebar', isOpen ? '1' : '0');
     }
-    
-    // Instead of localStorage, use sessionStorage which is faster
-    sessionStorage.setItem('sidebarOpen', isOpen);
-    
-    // Also add a URL parameter for direct links
-    setUrlParamWithoutReload('sidebar', isOpen ? '1' : '0');
-}
 
-// When page loads, check for sidebar state
-document.addEventListener('DOMContentLoaded', function() {
-    // Try URL parameter first (for direct links)
-    let sidebarParam = getUrlParam('sidebar');
-    
-    // If not in URL, check sessionStorage
-    if (sidebarParam === null) {
-        sidebarParam = sessionStorage.getItem('sidebarOpen');
+    function getUrlParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
     }
-    
-    const sidebarOpen = sidebarParam === '1' || sidebarParam === 'true';
-    const sidebar = document.getElementById("sidebar");
-    const content = document.getElementById("content");
-    const toggleButton = document.getElementById("toggleButton");
-    
-    // Apply the saved state
-    if (sidebarOpen) {
-        sidebar.classList.remove("-translate-x-full");
-        content.classList.add("ml-64");
-        toggleButton.classList.add("left-64");
-    } else {
-        sidebar.classList.add("-translate-x-full");
-        content.classList.remove("ml-64");
-        toggleButton.classList.remove("left-64");
+
+    function setUrlParamWithoutReload(name, value) {
+        const url = new URL(window.location);
+        url.searchParams.set(name, value);
+        window.history.replaceState({}, '', url);
     }
-});
-    </script>
+</script>
+
+
+
 </head>
 
 <body class="bg-gray-100 overflow-x-hidden">
@@ -141,11 +123,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 <span class="font-medium">Attendance</span>
             </a>
 
-            <a href="{{ route('Students') }}" class="flex items-center space-x-3 text-gray-600 p-2 hover:bg-gray-100 rounded-md">
+            <a href="{{ route('StudentsList') }}" class="flex items-center space-x-3 text-gray-600 p-2 hover:bg-gray-100 rounded-md">
                 <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                <span class="font-medium">Students</span>
+                <span class="font-medium">Students List</span>
             </a>
 
             <div class="text-gray-500 font-semibold mt-4 text-[13px] tracking-wide mb-1">Time settings</div>
