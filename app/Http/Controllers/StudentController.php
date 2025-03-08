@@ -23,30 +23,23 @@ class StudentController extends Controller
     // Mo-save sa student data
     public function store(Request $request)
     {
-       $data = $request->validate([
-            'student_id' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'gender' => 'required',
-            'contact' => 'required',
-            'address' => 'required',
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'student_id' => 'required', // Ensure student_id is unique
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender' => 'required|in:Male,Female,Other', // Validate gender options
+            'contact' => 'required|string|min:10|max:15', // Ensure proper contact length
+            'address' => 'required|string|max:500',
         ]);
-
-        
-        $new_student = new Student;
-        $new_student->student_id = $request->student_id;
-        $new_student->first_name = $request->first_name;
-        $new_student->last_name = $request->last_name;
-        $new_student->gender = $request->gender;
-        $new_student->contact = $request->contact;
-        $new_student->address = $request->address;
-        $new_student->save();
-
-
-
     
+        // Use mass assignment (instead of manually assigning each attribute)
+        Student::create($validatedData);
     
+        // Redirect back to student list with a success message
+        return redirect()->route('StudentsList')->with('success', 'Student added successfully!');
     }
+    
 
   }
 

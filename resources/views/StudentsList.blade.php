@@ -1,3 +1,8 @@
+
+</style>
+
+
+
 <x-Navigation>
     <!DOCTYPE html>
     <html lang="en">
@@ -6,77 +11,91 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <title>Student List</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        
+
     </head>
 
-    <body>
+    <body class="bg-gray-100 p-6">
 
-        <!-- Student List Table -->
+        <!-- Success Message -->
+        @if(session('success'))
+            <div class="alert alert-success bg-green-200 text-green-700 px-4 py-2 rounded-md mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
 
-
-        <div class="bg-white pb-4 px-4 rounded-md w-full">
-            <div class="flex justify-between w-full pt-6">
-                <p class="ml-3">Student List</p>
+        <div class="bg-white p-6 rounded-lg shadow-md w-full">
+            <div class="flex justify-between items-center pb-4">
+                <h2 class="text-lg font-semibold">Student List</h2>
 
                 <a href="/Add_student">
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                    <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
                         Add Student
                     </button>
                 </a>
-
             </div>
 
-            <div class="w-full flex justify-end px-2 mt-2">
-                <div class="w-full sm:w-64 inline-block relative">
-                    <input type="text" class="leading-snug border border-gray-300 block w-full appearance-none bg-gray-100 text-sm text-gray-600 py-1 px-4 pl-8 rounded-lg" placeholder="Search" />
-                    <div class="pointer-events-none absolute pl-3 inset-y-0 left-0 flex items-center px-2 text-gray-300">
-                        <svg class="fill-current h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path d="M508.874 478.708L360.142 329.976c28.21-34.827 45.191-79.103 45.191-127.309C405.333 90.917 314.416 0 202.666 0S0 90.917 0 202.667s90.917 202.667 202.667 202.667c48.206 0 92.482-16.982 127.309-45.191l148.732 148.732c4.167 4.165 10.919 4.165 15.086 0l15.081-15.082c4.165-4.166 4.165-10.92-.001-15.085zM202.667 362.667c-88.229 0-160-71.771-160-160s71.771-160 160-160 160 71.771 160 160-71.771 160-160 160z" />
+            <!-- Search Input -->
+            <div class="w-full flex justify-end mb-4">
+                <div class="relative w-full sm:w-64">
+                    <input type="text"
+                        class="border border-gray-300 block w-full bg-gray-100 text-sm text-gray-600 py-2 px-4 pl-10 rounded-lg"
+                        placeholder="Search">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path
+                                d="M508.874 478.708L360.142 329.976c28.21-34.827 45.191-79.103 45.191-127.309C405.333 90.917 314.416 0 202.666 0S0 90.917 0 202.667s90.917 202.667 202.667 202.667c48.206 0 92.482-16.982 127.309-45.191l148.732 148.732c4.167 4.165 10.919 4.165 15.086 0l15.081-15.082c4.165-4.166 4.165-10.92-.001-15.085zM202.667 362.667c-88.229 0-160-71.771-160-160s71.771-160 160-160 160 71.771 160 160-71.771 160-160 160z">
+                            </path>
                         </svg>
                     </div>
                 </div>
-
             </div>
-            <div class="overflow-x-auto mt-6">
 
-                <table class="table-auto border-collapse w-full">
+            <!-- Student List Table -->
+            <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+				<div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+					<table class="min-w-full leading-normal">
                     <thead>
-                        <tr class="rounded-lg text-sm font-medium text-gray-700 text-left">
-                            <th class="px-4 py-2 bg-gray-200">Student ID</th>
-                            <th class="px-4 py-2 bg-gray-200">First Name</th>
-                            <th class="px-4 py-2 bg-gray-200">Last Name</th>
-                            <th class="px-4 py-2 bg-gray-200">Gender</th>
-                            <th class="px-4 py-2 bg-gray-200">Contact</th>
-                            <th class="px-4 py-2 bg-gray-200">Address</th>
-                            <th class="px-4 py-2 bg-gray-200">Action</th>
+                        <tr class="bg-gray-200 text-sm font-semibold text-gray-700">
+                       
+                            <th class="px-5 py-3 border-b- border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Student ID</th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Full Name</th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Gender</th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Contact</th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Address</th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Action</th>
+                            
+
                         </tr>
                     </thead>
+                    <tbody class="bg-gray-100 border-b">
+                        @foreach($all_students as $student)
+                            <tr class="border-t hover:bg-gray-100">
+                        
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $student->student_id }}</td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $student->first_name }} {{ $student->last_name }}</td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $student->gender }}</td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $student->contact }}</td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $student->address }}</td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <a href="{{ url('/edit_student/'.$student->id) }}" class="text-blue-500 hover:underline">Edit</a>
+                                    <span class="mx-2">|</span>
+                                    <a href="{{ url('/delete_student/'.$student->id) }}" class="text-red-500 hover:underline" onclick="return confirm('Are you sure?')">Delete</a>
+                                </td>
 
+                                
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
+
         </div>
 
-        <style>
-            thead tr th:first-child {
-                border-top-left-radius: 10px;
-                border-bottom-left-radius: 10px;
-            }
-
-            thead tr th:last-child {
-                border-top-right-radius: 10px;
-                border-bottom-right-radius: 10px;
-            }
-
-            tbody tr td:first-child {
-                border-top-left-radius: 5px;
-                border-bottom-left-radius: 0px;
-            }
-
-            tbody tr td:last-child {
-                border-top-right-radius: 5px;
-                border-bottom-right-radius: 0px;
-            }
-        </style>
+        </div>
 
     </body>
 
