@@ -1,7 +1,4 @@
 
-</style>
-
-
 
 <x-Navigation>
     <!DOCTYPE html>
@@ -14,17 +11,32 @@
         <title>Student List</title>
         <script src="https://cdn.tailwindcss.com"></script>
 
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const modal = document.getElementById("successModal");
+                if (modal) {
+                    setTimeout(() => {
+                        modal.classList.add("opacity-0", "transition-opacity", "duration-1000");
+                        setTimeout(() => modal.style.display = "none", 1000);
+                    }, 1000);
+                }
+            });
+        </script>
         
-
     </head>
 
     <body class="bg-gray-100 p-6">
 
         <!-- Success Message -->
         @if(session('success'))
-            <div class="alert alert-success bg-green-200 text-green-700 px-4 py-2 rounded-md mb-4">
+        <div id="successModal" class="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75">
+            <div class="bg-green-100 text-green-700 px-6 py-4 rounded-md shadow-md text-center transition-opacity duration-1000 flex items-center">
+                <svg class="w-6 h-6 text-green-700 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
                 {{ session('success') }}
             </div>
+        </div>
         @endif
 
         <div class="bg-white p-6 rounded-lg shadow-md w-full">
