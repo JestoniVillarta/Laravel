@@ -16,6 +16,7 @@ class StudentController extends Controller
         try {
             $all_students = Student::all();
             return view('StudentsList', compact('all_students'));
+            
         } catch (Exception $e) {
             Log::error('Error fetching students: ' . $e->getMessage());
             return back()->withErrors('Unable to fetch students list at this time.');
@@ -51,14 +52,15 @@ class StudentController extends Controller
             // Check if the error is a duplicate entry error
             if ($e->getCode() === '23000') { // Adjust based on your database
                 Log::error('Duplicate student ID error: ' . $e->getMessage());
-                return redirect()->route('Attendance')->withErrors('The student ID is already in use. Please use a different ID.');
+                return redirect()->back()->withInput()->withErrors(['student_id' => 'The student ID is already in use. Please use a different ID.']);
             }
     
             Log::error('Error adding student: ' . $e->getMessage());
-            return redirect()->route('Attendance')->withErrors('An error occurred while trying to add the student.');
+            return redirect()->back()->withErrors('An error occurred while trying to add the student.');
         } catch (Exception $e) {
             Log::error('General error adding student: ' . $e->getMessage());
-            return redirect()->route('Attendance')->withErrors('An error occurred while trying to add the student.');
+            return redirect()->back()->withErrors('An error occurred while trying to add the student.');
         }
     }
+    
 }

@@ -19,7 +19,7 @@
         @csrf
             <div class="mb-4">
                 <label for="student_id"   class="block text-gray-700 font-medium mb-2">Student ID</label>
-                <input type="text" name="student_id" id="student_id" placeholder="Enter Student ID" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
+                <input type="text" name="student_id" id="student_id" placeholder="Enter Student ID" value="{{ old('student_id') }}" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
             </div>
 
             @if ($errors->any())
@@ -34,27 +34,26 @@
 
             <div class="mb-4">
                 <label for="first_name" class="block text-gray-700 font-medium mb-2">First Name</label>
-                <input type="text" name="first_name" id="first_name" placeholder="Enter First Name" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
+                <input type="text" name="first_name" id="first_name" placeholder="Enter First Name" value="{{ old('first_name') }}" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
             </div>
             <div class="mb-4">
                 <label for="last_name" class="block text-gray-700 font-medium mb-2">Last Name</label>
-                <input type="text" name="last_name" id="last_name" placeholder="Enter Last Name" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
+                <input type="text" name="last_name" id="last_name" placeholder="Enter Last Name" value="{{ old('last_name') }}" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
             </div>
             <div class="mb-4">
                 <label for="gender" class="block text-gray-700 font-medium mb-2">Gender</label>
-                <select name="gender" id="gender" class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
+                <select name="gender" id="gender" value="{{ old('gender') }}" class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400" required>
+                <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male</option>
+        <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female</option>
                 </select>
             </div>
             <div class="mb-4">
                 <label for="contact" class="block text-gray-700 font-medium mb-2">Contact</label>
-                <input type="text" name="contact" id="contact" placeholder="Enter Contact Number" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
+                <input type="text" name="contact" id="contact" placeholder="Enter Contact Number" value="{{ old('contact') }}" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
             </div>
             <div class="mb-4">
                 <label for="address" class="block text-gray-700 font-medium mb-2">Address</label>
-                <input type="text" name="address" id="address" placeholder="Enter Address" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
+                <input type="text" name="address" id="address" placeholder="Enter Address" value="{{ old('address') }}" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
             </div>
             <div class="mt-6">
                 <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-md transition" type="submit">Register</button>

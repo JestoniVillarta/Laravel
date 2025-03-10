@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TimeController;
 
 Route::get('/', function () {
     return view('Dashboard'); // Main Dashboard View
@@ -13,14 +14,16 @@ Route::get('/Attendance', function () {
 
 
 Route::get('/StudentsList', [StudentController::class, 'index'])->name('StudentsList');
+
 Route::get('/Add_student', [StudentController::class, 'AddStudent'])->name('Add_student');
 
 Route::post('/Add_student', [StudentController::class, 'store'])->name('store');
 
 
-Route::get('/Set_time', function () {
-    return view('Set_time'); // Documentation Page
-})->name('Set_time');
+Route::get('/Set_time', [TimeController::class, 'showForm'])->name('Set_time');
+
+Route::post('/Set_time', [TimeController::class, 'setAttendanceTime'])->name('attendance.set-time');
+
 
 
 
