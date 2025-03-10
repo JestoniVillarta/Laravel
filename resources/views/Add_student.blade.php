@@ -18,16 +18,27 @@
         <form action="{{ route('store') }}" method="post">
         @csrf
             <div class="mb-4">
-                <label for="student_id" class="block text-gray-700 font-medium mb-2">Student ID</label>
-                <input type="text" name="student_id" id="student_id" placeholder="Enter Student ID" class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
+                <label for="student_id"   class="block text-gray-700 font-medium mb-2">Student ID</label>
+                <input type="text" name="student_id" id="student_id" placeholder="Enter Student ID" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
             </div>
+
+            @if ($errors->any())
+    <div class="alert alert-danger text-red-500">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
             <div class="mb-4">
                 <label for="first_name" class="block text-gray-700 font-medium mb-2">First Name</label>
-                <input type="text" name="first_name" id="first_name" placeholder="Enter First Name" class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
+                <input type="text" name="first_name" id="first_name" placeholder="Enter First Name" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
             </div>
             <div class="mb-4">
                 <label for="last_name" class="block text-gray-700 font-medium mb-2">Last Name</label>
-                <input type="text" name="last_name" id="last_name" placeholder="Enter Last Name" class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
+                <input type="text" name="last_name" id="last_name" placeholder="Enter Last Name" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
             </div>
             <div class="mb-4">
                 <label for="gender" class="block text-gray-700 font-medium mb-2">Gender</label>
@@ -39,11 +50,11 @@
             </div>
             <div class="mb-4">
                 <label for="contact" class="block text-gray-700 font-medium mb-2">Contact</label>
-                <input type="text" name="contact" id="contact" placeholder="Enter Contact Number" class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
+                <input type="text" name="contact" id="contact" placeholder="Enter Contact Number" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
             </div>
             <div class="mb-4">
                 <label for="address" class="block text-gray-700 font-medium mb-2">Address</label>
-                <input type="text" name="address" id="address" placeholder="Enter Address" class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
+                <input type="text" name="address" id="address" placeholder="Enter Address" required class="w-full border rounded-md p-3 outline-none focus:ring-2 focus:ring-indigo-400">
             </div>
             <div class="mt-6">
                 <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-md transition" type="submit">Register</button>

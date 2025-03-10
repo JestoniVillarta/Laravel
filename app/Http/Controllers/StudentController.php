@@ -4,28 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use Illuminate\Support\Facades\Log;
+use Exception;
+use Illuminate\Database\QueryException;
 
 class StudentController extends Controller
 {
-    // Mo-display sa StudentsList.blade.php
+    // Display the StudentsList.blade.php
     public function index()
     {
-        $all_students = Student::all();
-        return view('StudentsList', compact('all_students'));
+        try {
+            $all_students = Student::all();
+            return view('StudentsList', compact('all_students'));
+        } catch (Exception $e) {
+            Log::error('Error fetching students: ' . $e->getMessage());
+            return back()->withErrors('Unable to fetch students list at this time.');
+        }
     }
 
-    // Mo-display sa Add_student.blade.php
+    // Display the Add_student.blade.php
     public function AddStudent()
     {
         return view('Add_student');
     }
 
-    // Mo-save sa student data
+    // Save the student data
     public function store(Request $request)
     {
         // Validate the incoming request data
         $validatedData = $request->validate([
-            'student_id' => 'required', // Ensure student_id is unique
+            'student_id' => 'required|unique:student_tbl,student_id', // Ensure student_id is unique
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'gender' => 'required|in:Male,Female,Other', // Validate gender options
@@ -33,13 +41,24 @@ class StudentController extends Controller
             'address' => 'required|string|max:500',
         ]);
     
-        // Use mass assignment (instead of manually assigning each attribute)
-        Student::create($validatedData);
+        try {
+            // Use mass assignment (instead of manually assigning each attribute)
+            Student::create($validatedData);
     
-        // Redirect back to student list with a success message
-        return redirect()->route('StudentsList')->with('success', 'Student added successfully!');
+            // Redirect back to student list with a success message
+            return redirect()->route('StudentsList')->with('success', 'Student added successfully!');
+        } catch (QueryException $e) {
+            // Check if the error is a duplicate entry error
+            if ($e->getCode() === '23000') { // Adjust based on your database
+                Log::error('Duplicate student ID error: ' . $e->getMessage());
+                return redirect()->route('Attendance')->withErrors('The student ID is already in use. Please use a different ID.');
+            }
+    
+            Log::error('Error adding student: ' . $e->getMessage());
+            return redirect()->route('Attendance')->withErrors('An error occurred while trying to add the student.');
+        } catch (Exception $e) {
+            Log::error('General error adding student: ' . $e->getMessage());
+            return redirect()->route('Attendance')->withErrors('An error occurred while trying to add the student.');
+        }
     }
-    
-
-  }
-
+}

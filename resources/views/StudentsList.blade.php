@@ -39,6 +39,7 @@
         </div>
         @endif
 
+
         <div class="bg-white p-6 rounded-lg shadow-md w-full">
             <div class="flex justify-between items-center pb-4">
                 <h2 class="text-lg font-semibold">Student List</h2>
@@ -74,6 +75,9 @@
                         <tr class="bg-gray-200 text-sm font-semibold text-gray-700">
                        
                             <th class="px-5 py-3 border-b- border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Student ID</th>
+
+
+
                             <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Full Name</th>
                             <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Gender</th>
                             <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Contact</th>
