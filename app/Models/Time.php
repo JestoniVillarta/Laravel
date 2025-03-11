@@ -25,15 +25,4 @@ class Time extends Model
         'afternoon_time_out_end',
     ];
 
-    // Define the casts for time fields
-    protected $casts = [
-        'morning_time_in' => 'datetime:h:i A',
-        'morning_time_in_end' => 'datetime:h:i A',
-        'morning_time_out' => 'datetime:h:i A',
-        'morning_time_out_end' => 'datetime:h:i A',
-        'afternoon_time_in' => 'datetime:h:i A',
-        'afternoon_time_in_end' => 'datetime:h:i A',
-        'afternoon_time_out' => 'datetime:h:i A',
-        'afternoon_time_out_end' => 'datetime:h:i A',
-    ];
 }

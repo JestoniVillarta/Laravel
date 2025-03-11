@@ -31,16 +31,16 @@ class TimeController extends Controller
     {
         // Validate the incoming request data
         $validatedData = $request->validate([
-         'morning_time_in' => 'required|date_format:h:i',
-'morning_time_in_end' => 'required|date_format:h:i',
-'morning_time_out' => 'required|date_format:h:i',
-'morning_time_out_end' => 'required|date_format:h:i A',
-'afternoon_time_in' => 'required|date_format:h:i',
-'afternoon_time_in_end' => 'required|date_format:h:i',
-'afternoon_time_out' => 'required|date_format:h:i',
-'afternoon_time_out_end' => 'required|date_format:h:i',
-
+            'morning_time_in' => 'required|date_format:H:i',
+            'morning_time_in_end' => 'required|date_format:H:i',
+            'morning_time_out' => 'required|date_format:H:i',
+            'morning_time_out_end' => 'required|date_format:H:i',
+            'afternoon_time_in' => 'required|date_format:H:i',
+            'afternoon_time_in_end' => 'required|date_format:H:i',
+            'afternoon_time_out' => 'required|date_format:H:i',
+            'afternoon_time_out_end' => 'required|date_format:H:i',
         ]);
+        
 
         // Fetch the first record for attendance times
         $attendanceTime = Time::first();
