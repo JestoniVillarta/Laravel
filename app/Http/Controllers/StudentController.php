@@ -15,7 +15,7 @@ class StudentController extends Controller
     {
         try {
             $all_students = Student::all();
-            return view('StudentsList', compact('all_students'));
+            return view('studentsList', compact('all_students'));
             
         } catch (Exception $e) {
             Log::error('Error fetching students: ' . $e->getMessage());
@@ -26,7 +26,7 @@ class StudentController extends Controller
     // Display the Add_student.blade.php
     public function AddStudent()
     {
-        return view('Add_student');
+        return view('add_student');
     }
 
     // Save the student data
@@ -47,7 +47,7 @@ class StudentController extends Controller
             Student::create($validatedData);
     
             // Redirect back to student list with a success message
-            return redirect()->route('StudentsList')->with('success', 'Student added successfully!');
+            return redirect()->route('studentsList')->with('success', 'Student added successfully!');
         } catch (QueryException $e) {
             // Check if the error is a duplicate entry error
             if ($e->getCode() === '23000') { // Adjust based on your database

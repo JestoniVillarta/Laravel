@@ -44,7 +44,7 @@
             <div class="flex justify-between items-center pb-4">
                 <h2 class="text-lg font-semibold">Student List</h2>
 
-                <a href="/Add_student">
+                <a href="/add_student">
                     <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
                         Add Student
                     </button>

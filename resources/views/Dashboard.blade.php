@@ -1,4 +1,4 @@
-<x-Navigation>
+<x-navigation>
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -13,4 +13,4 @@
     </body>
     </html>
 
-</x-Navigation>
+</x-navigation>
