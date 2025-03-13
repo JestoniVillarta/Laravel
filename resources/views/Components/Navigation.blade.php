@@ -134,7 +134,7 @@ function setUrlParamWithoutReload(name, value) {
 
     <nav id="navbar" class="bg-white shadow-md ml-0.5 fixed top-0 left-64 w-[calc(100%-16rem)] flex items-center justify-between px-6 py-3 z-40 transition-all duration-300">
         <button id="toggleButton" onclick="toggleSidebar()"
-            class="fixed left-2 top-4 bg-white p-2 rounded text-gray-600 hover:text-gray-900 transition-all duration-300 z-50">
+            class="fixed left-2 top-4 bg-white p-2 rounded text-gray-600 hover:text-gray-900 transition-all duration-300 z-50 hover:bg-gray-100">
             <svg class="w-6 h-6 min-w-[1.5rem] min-h-[1.5rem]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
@@ -146,7 +146,7 @@ function setUrlParamWithoutReload(name, value) {
     </nav>
 
 
-    <div id="sidebar" class="min-h-screen bg-white p-1.75 fixed left-0 top-0 w-65 transition-all duration-300 ease-in-out z-50">
+    <div id="sidebar" class="min-h-screen bg-white  fixed left-0 top-0 w-65 transition-all duration-300 ease-in-out z-50">
         
         <svg class="w-8 h-8 text-indigo-500" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M50 20C38 20 31 27 28 41C33 34 39 31 46 31C52 31 56 34 60 40C64 46 68 49 74 49C82 49 87 44 90 34C84 41 78 44 72 44C66 44 62 41 58 35C54 29 50 26 44 26C36 26 31 31 28 41M28 60C22 60 17 65 14 75C20 68 26 65 32 65C38 65 42 68 46 74C50 80 54 83 60 83C68 83 73 78 76 68C70 75 64 78 58 78C52 78 48 75 44 69C40 63 36 60 30 60H28Z" />
