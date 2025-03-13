@@ -5,24 +5,24 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TimeController;
 
 Route::get('/', function () {
-    return view('dashboard'); // Main Dashboard View
+    return view('admin.dashboard'); // Main Dashboard View
 });
 
-Route::get('/attendance', function () {
-    return view('attendance'); // Documentation Page
-})->name('attendance');
+Route::get('/admin.attendance', function () {
+    return view('admin.attendance'); // Documentation Page
+})->name('admin.attendance');
 
 
-Route::get('/studentsList', [StudentController::class, 'index'])->name('studentsList');
+Route::get('/admin.studentsList', [StudentController::class, 'index'])->name('admin.studentsList');
 
-Route::get('/add_student', [StudentController::class, 'AddStudent'])->name('add_student');
+Route::get('/admin.add_student', [StudentController::class, 'AddStudent'])->name('admin.add_student');
 
-Route::post('/add_student', [StudentController::class, 'store'])->name('store');
+Route::post('/admin.add_student', [StudentController::class, 'store'])->name('store');
 
 
-Route::get('/set_time', [TimeController::class, 'showForm'])->name('set_time');
+Route::get('/admin.set_time', [TimeController::class, 'showForm'])->name('admin.set_time');
 
-Route::post('/set_time', [TimeController::class, 'setAttendanceTime'])->name('attendance.set-time');
+Route::post('/admin.set_time', [TimeController::class, 'setAttendanceTime'])->name('attendance.set-time');
 
 
 

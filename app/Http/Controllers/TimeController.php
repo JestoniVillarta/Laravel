@@ -12,7 +12,7 @@ class TimeController extends Controller
     {
         $attendanceTime = Time::first();
 
-        return view('Set_time', [
+        return view('admin.set_time', [
             'morning_time_in' => $attendanceTime->morning_time_in ?? '',
             'morning_time_in_end' => $attendanceTime->morning_time_in_end ?? '',
             'morning_time_out' => $attendanceTime->morning_time_out ?? '',

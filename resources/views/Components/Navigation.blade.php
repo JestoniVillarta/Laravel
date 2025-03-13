@@ -164,7 +164,7 @@ function setUrlParamWithoutReload(name, value) {
                 </a>
             
                 <!-- Attendance -->
-                <a href="{{ route('attendance') }}" class="{{ request()->is('attendance') ? 'bg-gray-100 text-indigo-600 p-4 rounded-l-3xl' : 'p-4 rounded-md' }} flex items-center">
+                <a href="{{ route('admin.attendance') }}" class="{{ request()->is('admin.attendance') ? 'bg-gray-100 text-indigo-600 p-4 rounded-l-3xl' : 'p-4 rounded-md' }} flex items-center">
                     <svg class="w-7 h-7 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6M9 8h6m-8 8h10M4 4h16v16H4zM7 16l2 2 4-4"></path>
                     </svg>
@@ -174,7 +174,7 @@ function setUrlParamWithoutReload(name, value) {
                 
             
                 <!-- Students List -->
-                <a href="{{ route('studentsList') }}" class="{{ request()->is('studentsList') ? 'bg-gray-100 text-indigo-600 p-4 rounded-l-3xl' : 'p-4 rounded-md' }} flex items-center">
+                <a href="{{ route('admin.studentsList') }}" class="{{ request()->is('admin.studentsList') ? 'bg-gray-100 text-indigo-600 p-4 rounded-l-3xl' : 'p-4 rounded-md' }} flex items-center">
                     <svg class="w-7 h-7 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5V8H2v12h5m10-12V4a2 2 0 00-2-2H9a2 2 0 00-2 2v4m5 4a4 4 0 110-8 4 4 0 010 8zm6 8a6 6 0 00-12 0"></path>
                     </svg>
@@ -183,7 +183,7 @@ function setUrlParamWithoutReload(name, value) {
                 
             
                 <!-- Set Time -->
-                <a href="{{ route('set_time') }}" class="{{ request()->is('set_time') ? 'bg-gray-100 text-indigo-600 p-4 rounded-l-3xl' : 'p-4' }} flex items-center">
+                <a href="{{ route('admin.set_time') }}" class="{{ request()->is('admin.set_time') ? 'bg-gray-100 text-indigo-600 p-4 rounded-l-3xl' : 'p-4' }} flex items-center">
                     <svg class="w-7 h-7 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m5-3a9 9 0 11-6.32-8.94"></path>
                     </svg>

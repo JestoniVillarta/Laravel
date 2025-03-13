@@ -1,6 +1,6 @@
 
 
-<x-Navigation>
+<x-navigation>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -44,7 +44,7 @@
             <div class="flex justify-between items-center pb-4">
                 <h2 class="text-lg font-semibold">Student List</h2>
 
-                <a href="/add_student">
+                <a href="/admin.add_student">
                     <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
                         Add Student
                     </button>
@@ -116,4 +116,4 @@
     </body>
 
     </html>
-</x-Navigation>
+</x-navigation>
