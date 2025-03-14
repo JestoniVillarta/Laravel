@@ -3,8 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TimeController;
+use App\Http\Controllers\AttendanceController;
 
 Route::get('/', function () {
+    return view('index'); // Main Dashboard View
+});
+
+Route::get('/admin.dashboard', function () {
     return view('admin.dashboard'); // Main Dashboard View
 });
 
@@ -25,6 +30,10 @@ Route::get('/admin.set_time', [TimeController::class, 'showForm'])->name('admin.
 Route::post('/admin.set_time', [TimeController::class, 'setAttendanceTime'])->name('attendance.set-time');
 
 
+
+Route::get('/', [AttendanceController::class, 'index']);
+
+Route::post('/attendance', [AttendanceController::class, 'store'])->name('attendance.store');
 
 
 Route::get('/login', function () {

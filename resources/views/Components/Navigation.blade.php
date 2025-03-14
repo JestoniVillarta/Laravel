@@ -156,7 +156,7 @@ function setUrlParamWithoutReload(name, value) {
 
           
                 <!-- Dashboard -->
-                <a href="/" class="{{ request()->is('/') ? 'bg-gray-200 text-indigo-600 p-4 rounded-l-3xl' : 'p-4 rounded-md' }} flex items-center">
+                <a href="admin.dashboard" class="{{ request()->is('admin.dashboard') ? 'bg-gray-200 text-indigo-600 p-4 rounded-l-3xl' : 'p-4 rounded-md' }} flex items-center">
                     <svg class="w-7 h-7 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9M4 10v10h5v-6h6v6h5V10"></path>
                     </svg>
