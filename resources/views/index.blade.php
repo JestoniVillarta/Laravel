@@ -15,7 +15,7 @@
     <h1 class="text-3xl font-bold mb-5 text-center">TRAINEE ATTENDANCE SYSTEM</h1>
 
 
-    <form action="{{ url('/attendance') }}" method="POST" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+    <form action="{{ route('attendance') }}" method="POST" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
         @csrf
 
         <input type="text" id="student_id" name="student_id" placeholder="ENTER YOUR ID:" required class="w-full p-3 mb-4 border rounded">

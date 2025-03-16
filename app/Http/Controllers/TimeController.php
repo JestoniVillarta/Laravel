@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Time;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class TimeController extends Controller
 {
@@ -13,14 +14,14 @@ class TimeController extends Controller
         $attendanceTime = Time::first();
 
         return view('admin.set_time', [
-            'morning_time_in' => $attendanceTime->morning_time_in ?? '',
-            'morning_time_in_end' => $attendanceTime->morning_time_in_end ?? '',
-            'morning_time_out' => $attendanceTime->morning_time_out ?? '',
-            'morning_time_out_end' => $attendanceTime->morning_time_out_end ?? '',
-            'afternoon_time_in' => $attendanceTime->afternoon_time_in ?? '',
-            'afternoon_time_in_end' => $attendanceTime->afternoon_time_in_end ?? '',
-            'afternoon_time_out' => $attendanceTime->afternoon_time_out ?? '',
-            'afternoon_time_out_end' => $attendanceTime->afternoon_time_out_end ?? '',
+            'morning_time_in' => $attendanceTime ? Carbon::parse($attendanceTime->morning_time_in)->format('H:i') : '',
+            'morning_time_in_end' => $attendanceTime ? Carbon::parse($attendanceTime->morning_time_in_end)->format('H:i') : '',
+            'morning_time_out' => $attendanceTime ? Carbon::parse($attendanceTime->morning_time_out)->format('H:i') : '',
+            'morning_time_out_end' => $attendanceTime ? Carbon::parse($attendanceTime->morning_time_out_end)->format('H:i') : '',
+            'afternoon_time_in' => $attendanceTime ? Carbon::parse($attendanceTime->afternoon_time_in)->format('H:i') : '',
+            'afternoon_time_in_end' => $attendanceTime ? Carbon::parse($attendanceTime->afternoon_time_in_end)->format('H:i') : '',
+            'afternoon_time_out' => $attendanceTime ? Carbon::parse($attendanceTime->afternoon_time_out)->format('H:i') : '',
+            'afternoon_time_out_end' => $attendanceTime ? Carbon::parse($attendanceTime->afternoon_time_out_end)->format('H:i') : '',
         ]);
     }
 
@@ -47,6 +48,11 @@ class TimeController extends Controller
         }
 
         $validatedData = $validator->validated();
+
+        // Convert time to 12-hour format with AM/PM before saving
+        foreach ($validatedData as $key => $time) {
+            $validatedData[$key] = Carbon::parse($time)->format('h:i A');
+        }
 
         $attendanceTime = Time::first();
 

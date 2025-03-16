@@ -31,9 +31,9 @@ Route::post('/admin.set_time', [TimeController::class, 'setAttendanceTime'])->na
 
 
 
-Route::get('/', [AttendanceController::class, 'index']);
+Route::get('/', [AttendanceController::class, 'userPage']);
 
-Route::post('/attendance', [AttendanceController::class, 'store'])->name('attendance.store');
+Route::post('/', [AttendanceController::class, 'submitAttendance'])->name('attendance');
 
 
 Route::get('/login', function () {

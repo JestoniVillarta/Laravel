@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('gender');
             $table->date('date');
-            $table->time('morning_time_in')->nullable();
-            $table->time('morning_time_out')->nullable();
-            $table->time('afternoon_time_in')->nullable();
-            $table->time('afternoon_time_out')->nullable();
+            $table->string('morning_time_in')->nullable();
+            $table->string('morning_time_out')->nullable();
+            $table->string('afternoon_time_in')->nullable();
+            $table->string('afternoon_time_out')->nullable();
             $table->string('morning_status')->nullable();
             $table->string('afternoon_status')->nullable();
             $table->string('duty_hours')->nullable();

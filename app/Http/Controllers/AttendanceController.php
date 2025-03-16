@@ -10,119 +10,97 @@ use Carbon\Carbon;
 
 class AttendanceController extends Controller
 {
-    public function index()
+    public function userPage()
     {
-        // Retrieve time settings from the database
-        // Assuming the table 'time_tbl' has columns: 'morning_in', 'morning_out', 'afternoon_in', 'afternoon_out'
-        $settings = Time::find(1);
+        // Get current time in Asia/Manila timezone
+        $current_time = Carbon::now('Asia/Manila')->format('h:i A');  
     
-        // Get the current time and date in 24-hour format
-        $current_time_24 = Carbon::now()->format('H:i');
-        $current_date = Carbon::now()->format('Y-m-d');
+        // Fetch time settings from the database
+        $settings = Time::first();
     
-        // Initialize button visibility to false
-        $show_morning_in = false;
-        $show_morning_out = false;
-        $show_afternoon_in = false;
-        $show_afternoon_out = false;
+        // Initialize button visibility
+        $show_morning_in = true;
+        $show_morning_out = true;
+        $show_afternoon_in = true;
+        $show_afternoon_out = true;
     
-        // Check if the current time falls within the specified time ranges
-        if ($settings) {
-            // Assuming 'morning_in' and 'morning_out' are time strings in 'H:i' format
-            if ($current_time_24 >= $settings->morning_in && $current_time_24 < $settings->morning_out) {
-                $show_morning_in = true;
-            }
-            if ($current_time_24 >= $settings->morning_out && $current_time_24 < $settings->afternoon_in) {
-                $show_morning_out = true;
-            }
-            if ($current_time_24 >= $settings->afternoon_in && $current_time_24 < $settings->afternoon_out) {
-                $show_afternoon_in = true;
-            }
-            if ($current_time_24 >= $settings->afternoon_out) {
-                $show_afternoon_out = true;
-            }
-        }
-    
-        // Return view with the necessary data
-        return view('index', compact('show_morning_in', 'show_morning_out', 'show_afternoon_in', 'show_afternoon_out', 'current_date', 'current_time_24'));
+        return view('index', compact(
+            'show_morning_in', 
+            'show_morning_out', 
+            'show_afternoon_in', 
+            'show_afternoon_out'
+        ));
     }
 
-    public function store(Request $request)
-    {
-        // Validate the request to ensure student_id is provided
-        $request->validate([
-            'student_id' => 'required|string',
-        ]);
+    public function submitAttendance(Request $request) {
+        $request->validate(['student_id' => 'required|string']);
 
-        $student_id = $request->input('student_id');
-        $student = Student::where('student_id', $student_id)->first();
-
-        // Check if the student exists
+        // Get current date & time with timezone
+        $current_time = Carbon::now('Asia/Manila')->format("h:i A"); 
+        $current_date = Carbon::today('Asia/Manila')->toDateString();
+        
+        // Fetch student details
+        $student = Student::where('student_id', $request->student_id)
+            ->select('student_id', 'first_name', 'last_name', 'gender')
+            ->first();
+        
         if (!$student) {
-            return redirect()->back()->with('error', 'Student not found.');
+            return back()->with('error', '❌ Error: Student not found.');
         }
+        
+        // Get or create attendance record
+        $attendance = Attendance::firstOrCreate(
+            [
+                'student_id' => $student->student_id,
+                'date' => $current_date,  
+            ],
+            [
+                'name' => $student->first_name . ' ' . $student->last_name,
+                'gender' => $student->gender
+            ]
+        );
 
-        $current_date = Carbon::now()->format('Y-m-d');
-        $attendance = Attendance::where('student_id', $student_id)->where('DATE', $current_date)->first();
-
-        // Create a new attendance record if none exists
-        if (!$attendance) {
-            $attendance = new Attendance();
-            $attendance->STUDENT_ID = $student_id;
-            $attendance->NAME = $student->FIRST_NAME . ' ' . $student->LAST_NAME;
-            $attendance->GENDER = $student->GENDER;
-            $attendance->DATE = $current_date;
-            $attendance->save();
-        }
-
-        // Process attendance actions based on button clicked
-        $current_time = Carbon::now()->format('H:i:s');
-
-        if ($request->has('morning_in') && !$attendance->MORNING_TIME_IN) {
-            $attendance->MORNING_TIME_IN = $current_time;
-            $attendance->MORNING_STATUS = 'Present';
-        } elseif ($request->has('morning_out') && !$attendance->MORNING_TIME_OUT) {
-            if ($attendance->MORNING_TIME_IN) {
-                $attendance->MORNING_TIME_OUT = $current_time;
-            } else {
-                return redirect()->back()->with('error', 'You have not timed in this morning.');
+        // Handle time-in and time-out events
+        if ($request->has('morning_in') && !$attendance->morning_time_in) {
+            $attendance->update(['morning_time_in' => $current_time, 'morning_status' => 'Present']);
+        } elseif ($request->has('morning_out') && !$attendance->morning_time_out) {
+            if (!$attendance->morning_time_in) {
+                return back()->with('error', '❌ Error: You have not timed in today!');
             }
-        } elseif ($request->has('afternoon_in') && !$attendance->AFTERNOON_TIME_IN) {
-            $attendance->AFTERNOON_TIME_IN = $current_time;
-            $attendance->AFTERNOON_STATUS = 'Present';
-        } elseif ($request->has('afternoon_out') && !$attendance->AFTERNOON_TIME_OUT) {
-            if ($attendance->AFTERNOON_TIME_IN) {
-                $attendance->AFTERNOON_TIME_OUT = $current_time;
-            } else {
-                return redirect()->back()->with('error', 'You have not timed in this afternoon.');
+            $attendance->update(['morning_time_out' => $current_time]);
+        } elseif ($request->has('afternoon_in') && !$attendance->afternoon_time_in) {
+            $attendance->update(['afternoon_time_in' => $current_time, 'afternoon_status' => 'Present']);
+        } elseif ($request->has('afternoon_out') && !$attendance->afternoon_time_out) {
+            if (!$attendance->afternoon_time_in) {
+                return back()->with('error', '❌ Error: You have not timed in today!');
             }
+            $attendance->update(['afternoon_time_out' => $current_time]);
         } else {
-            return redirect()->back()->with('error', 'Duplicate entry detected for today.');
+            return back()->with('error', '❌ Error: Duplicate entry detected for today.');
         }
 
-        // Compute and update the total duty time
-        $morning_seconds = $this->computeTotalTime($attendance->MORNING_TIME_IN, $attendance->MORNING_TIME_OUT);
-        $afternoon_seconds = $this->computeTotalTime($attendance->AFTERNOON_TIME_IN, $attendance->AFTERNOON_TIME_OUT);
+        // Re-fetch updated attendance data
+        $attendance->refresh();
 
+        // Compute total duty hours
+        function computeTotalTime($time_in, $time_out) {
+            if ($time_in && $time_out) {
+                return (strtotime($time_out) - strtotime($time_in));
+            }
+            return 0;
+        }
+
+        $morning_seconds = computeTotalTime($attendance->morning_time_in, $attendance->morning_time_out);
+        $afternoon_seconds = computeTotalTime($attendance->afternoon_time_in, $attendance->afternoon_time_out);
+        
         $total_seconds = $morning_seconds + $afternoon_seconds;
         $total_hours = floor($total_seconds / 3600);
         $total_minutes = round(($total_seconds % 3600) / 60);
-        $attendance->DUTY_HOURS = sprintf("%d.%02d", $total_hours, $total_minutes);
+        $duty_hours = sprintf("%d.%02d", $total_hours, $total_minutes);
 
-        // Save the updated attendance record
-        $attendance->save();
+        // Update duty hours
+        $attendance->update(['duty_hours' => $duty_hours]);
 
-        return redirect()->back()->with('success', 'Attendance recorded successfully!');
-    }
-
-    private function computeTotalTime($time_in, $time_out)
-    {
-        // Calculate the difference in seconds between time in and time out
-        if ($time_in && $time_out) {
-            $start = Carbon::parse($time_in);
-            $end = Carbon::parse($time_out);
-            return $end->diffInSeconds($start);
-        }
-        return 0;
+        return back()->with('success', '✅ Attendance recorded successfully!');
     }
 }
