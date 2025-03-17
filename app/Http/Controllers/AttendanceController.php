@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\Time;
 use App\Models\Attendance;
 use App\Models\Student;
 use Carbon\Carbon;
+use Exception;
+
 
 class AttendanceController extends Controller
 {
@@ -31,6 +34,20 @@ class AttendanceController extends Controller
             'show_afternoon_out'
         ));
     }
+
+    public function showAttendance()
+    {
+        try {
+  
+            $attendances = Attendance::all();
+            return view('admin.attendance', compact('attendances'));
+            
+        } catch (Exception $e) {
+            Log::error('Error fetching attendance records: ' . $e->getMessage());
+            return back()->withErrors('Unable to fetch attendance records at this time.');
+        }
+    }
+
 
     public function submitAttendance(Request $request) {
         $request->validate(['student_id' => 'required|string']);
@@ -103,4 +120,8 @@ class AttendanceController extends Controller
 
         return back()->with('success', '✅ Attendance recorded successfully!');
     }
+
+
+
+
 }

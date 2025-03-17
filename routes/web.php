@@ -17,6 +17,8 @@ Route::get('/admin.attendance', function () {
     return view('admin.attendance'); // Documentation Page
 })->name('admin.attendance');
 
+Route::get('/admin.attendance', [AttendanceController::class, 'showAttendance'])->name('admin.attendance');
+
 
 Route::get('/admin.studentsList', [StudentController::class, 'index'])->name('admin.studentsList');
 
@@ -34,6 +36,7 @@ Route::post('/admin.set_time', [TimeController::class, 'setAttendanceTime'])->na
 Route::get('/', [AttendanceController::class, 'userPage']);
 
 Route::post('/', [AttendanceController::class, 'submitAttendance'])->name('attendance');
+
 
 
 Route::get('/login', function () {
