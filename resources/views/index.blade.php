@@ -33,18 +33,23 @@
         @endif
         
         <div class="flex justify-center gap-4">
+
     @if ($show_morning_in)
         <button type="submit" name="morning_in" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Morning Time In</button>
     @endif
+
     @if ($show_morning_out)
         <button type="submit" name="morning_out" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Morning Time Out</button>
     @endif
+
     @if ($show_afternoon_in)
         <button type="submit" name="afternoon_in" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Afternoon Time In</button>
     @endif
+
     @if ($show_afternoon_out)
         <button type="submit" name="afternoon_out" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Afternoon Time Out</button>
     @endif
+    
 </div>
     </form>
 

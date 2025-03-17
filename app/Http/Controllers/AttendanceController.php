@@ -53,6 +53,19 @@ class AttendanceController extends Controller
             'show_afternoon_out'
         ));
     }
+
+    public function searchAttendance(Request $request)
+    {
+        // Get the selected date (default to today if not set)
+        $selectedDate = $request->input('date', Carbon::today()->toDateString());
+    
+        // Fetch attendance records for the selected date
+        $attendances = Attendance::whereDate('date', $selectedDate)->get();
+    
+        // Return the view with filtered records
+        return view('admin.attendance', compact('attendances', 'selectedDate'));
+    }
+    
     
 
 

@@ -37,6 +37,9 @@ Route::get('/', [AttendanceController::class, 'showAttendanceButtons']);
 
 Route::post('/', [AttendanceController::class, 'submitAttendance'])->name('attendance');
 
+Route::get('/admin/attendance/search', [AttendanceController::class, 'searchAttendance'])->name('attendance.search');
+
+
 
 
 Route::get('/login', function () {

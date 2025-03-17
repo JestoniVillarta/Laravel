@@ -50,10 +50,33 @@
             <!-- Search Input -->
             <div class="w-full flex justify-end mb-4 gap-4">
 
-                <div class="relative w-full sm:w-64 ">
-                    <input type="text"
+               <!-- Gender Dropdown Filter -->
+<div>
+    <select id="genderFilter"
+        class="border border-gray-300 block bg-gray-100 text-sm text-gray-600 py-2 px-4 rounded-lg">
+        <option value="">All Genders</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
+</div>
+
+<script>
+    document.getElementById("genderFilter").addEventListener("change", function () {
+        let genderValue = this.value.trim().toLowerCase();
+        let rows = document.querySelectorAll("tbody tr");
+
+        rows.forEach(row => {
+            let gender = row.cells[2].textContent.trim().toLowerCase(); // Ensure no extra spaces
+
+            row.style.display = (genderValue === "" || gender === genderValue) ? "" : "none";
+        });
+    });
+</script>
+
+                <div class="relative w-full sm:w-64">
+                    <input type="text" id="searchInput"
                         class="border border-gray-300 block w-full bg-gray-100 text-sm text-gray-600 py-2 px-4 pl-10 rounded-lg"
-                        placeholder="Search">
+                        placeholder="Search by ID or Name" autocomplete="off">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path
@@ -62,6 +85,24 @@
                         </svg>
                     </div>
                 </div>
+
+         
+            
+            <script>
+                document.getElementById("searchInput").addEventListener("input", function () {
+                    let filter = this.value.toLowerCase().trim();
+                    let rows = document.querySelectorAll("tbody tr");
+            
+                    rows.forEach(row => {
+                        let studentID = row.cells[0].textContent.toLowerCase();
+                        let fullName = row.cells[1].textContent.toLowerCase();
+            
+                        row.style.display = (studentID.includes(filter) || fullName.includes(filter)) ? "" : "none";
+                    });
+                });
+            </script>
+
+
                 <a href="/admin.add_student">
                     <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
                         Add Student
