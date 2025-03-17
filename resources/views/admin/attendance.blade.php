@@ -11,7 +11,7 @@
         <title>Attendance Records</title>
         <script src="https://cdn.tailwindcss.com"></script>
 
-      
+
     </head>
 
     <body class="bg-gray-100 p-6">
@@ -40,46 +40,55 @@
                     <table class="min-w-full leading-normal">
                         <thead>
                             <tr class="bg-gray-200 text-sm font-semibold text-gray-700">
-                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Student ID</th>
-                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
-                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Gender</th>
-                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Date</th>
-                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Morning Time In</th>
-                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Morning Time Out</th>
-                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Afternoon Time In</th>
-                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Afternoon Time Out</th>
-                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Duty Hours</th>
-                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Morning Status</th>
-                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Afternoon Status</th>
+                                <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Student ID</th>
+                                <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Name</th>
+                                <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Gender</th>
+                                <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Date</th>
+                                <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Morning Time In</th>
+                                <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Morning Time Out</th>
+                                <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Afternoon Time In</th>
+                                <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Afternoon Time Out</th>
+                                <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Duty Hours</th>
+                                <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Morning Status</th>
+                                <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Afternoon Status</th>
                             </tr>
                         </thead>
                         <tbody class="bg-gray-100 border-b">
                             @forelse($attendances as $attendance)
-                                <tr class="border-t hover:bg-gray-100">
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $attendance->student_id }}</td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $attendance->name }}</td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $attendance->gender }}</td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $attendance->date }}</td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $attendance->morning_time_in ?? 'N/A' }}</td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $attendance->morning_time_out ?? 'N/A' }}</td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $attendance->afternoon_time_in ?? 'N/A' }}</td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $attendance->afternoon_time_out ?? 'N/A' }}</td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $attendance->duty_hours ?? '0.00' }}</td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <span class="{{ $attendance->morning_status === 'Present' ? 'text-green-600' : 'text-red-600' }}">
-                                            {{ $attendance->morning_status ?? 'Absent' }}
-                                        </span>
-                                    </td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <span class="{{ $attendance->afternoon_status === 'Present' ? 'text-green-600' : 'text-red-600' }}">
-                                            {{ $attendance->afternoon_status ?? 'Absent' }}
-                                        </span>
-                                    </td>
-                                </tr>
+                            <tr class="border-t hover:bg-gray-100">
+                                <td class="px-5 py-3 border-2 border-gray-200 bg-white text-sm">{{ $attendance->student_id }}</td>
+                                <td class="px-3 py-3 border-2 border-gray-200 bg-white text-sm">{{ $attendance->name }}</td>
+                                <td class="px-3 py-3 border-2 border-gray-200 bg-white text-sm">{{ $attendance->gender }}</td>
+                                <td class="px-3 py-3 border-2 border-gray-200 bg-white text-sm">{{ $attendance->date }}</td>
+                                <td class="px-3 py-3 border-2 border-gray-200 bg-white text-sm">
+                                    {{ $attendance && $attendance->morning_time_in ? $attendance->morning_time_in : '' }}
+                                </td>
+                                <td class="px-3 py-3 border-2 border-gray-200 bg-white text-sm">
+                                    {{ $attendance && $attendance->morning_time_out ? $attendance->morning_time_out : '' }}
+                                </td>
+                                <td class="px-3 py-3 border-2 border-gray-200 bg-white text-sm">
+                                    {{ $attendance && $attendance->afternoon_time_in ? $attendance->afternoon_time_in : '' }}
+                                </td>
+                                <td class="px-3 py-3 border-2 border-gray-200 bg-white text-sm">
+                                    {{ $attendance && $attendance->afternoon_time_out ? $attendance->afternoon_time_out : '' }}
+                                </td>
+
+                                <td class="px-3 py-3 border-2 border-gray-200 bg-white text-sm">{{ $attendance->duty_hours ?? '0.00' }}</td>
+                                <td class="px-3 py-3 border-2 border-gray-200 bg-white text-sm">
+                                    <span class="{{ $attendance->morning_status === 'Present' ? 'text-green-600' : 'text-red-600' }}">
+                                        {{ $attendance->morning_status ?? 'Absent' }}
+                                    </span>
+                                </td>
+                                <td class="px-3 py-3 border-2 border-gray-200 bg-white text-sm">
+                                    <span class="{{ $attendance->afternoon_status === 'Present' ? 'text-green-600' : 'text-red-600' }}">
+                                        {{ $attendance->afternoon_status ?? 'Absent' }}
+                                    </span>
+                                </td>
+                            </tr>
                             @empty
-                                <tr>
-                                    <td colspan="12" class="text-center py-4">No attendance records available.</td>
-                                </tr>
+                            <tr>
+                                <td colspan="12" class="text-center py-4">No attendance records available.</td>
+                            </tr>
                             @endforelse
                         </tbody>
                     </table>
@@ -88,5 +97,6 @@
         </div>
 
     </body>
+
     </html>
 </x-navigation>

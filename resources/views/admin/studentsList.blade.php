@@ -44,16 +44,13 @@
             <div class="flex justify-between items-center pb-4">
                 <h2 class="text-lg font-semibold">Student List</h2>
 
-                <a href="/admin.add_student">
-                    <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
-                        Add Student
-                    </button>
-                </a>
+        
             </div>
 
             <!-- Search Input -->
-            <div class="w-full flex justify-end mb-4">
-                <div class="relative w-full sm:w-64">
+            <div class="w-full flex justify-end mb-4 gap-4">
+
+                <div class="relative w-full sm:w-64 ">
                     <input type="text"
                         class="border border-gray-300 block w-full bg-gray-100 text-sm text-gray-600 py-2 px-4 pl-10 rounded-lg"
                         placeholder="Search">
@@ -65,24 +62,26 @@
                         </svg>
                     </div>
                 </div>
+                <a href="/admin.add_student">
+                    <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                        Add Student
+                    </button>
+                </a>
             </div>
 
             <!-- Student List Table -->
             <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
 				<div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-					<table class="min-w-full leading-normal">
+					<table class="min-w-full leading-normal" style="table-layout: auto; width: 100%;">
                     <thead>
                         <tr class="bg-gray-200 text-sm font-semibold text-gray-700">
                        
-                            <th class="px-5 py-3 border-b- border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Student ID</th>
-
-
-
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Full Name</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Gender</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Contact</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Address</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Action</th>
+                            <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Student ID</th>
+                            <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Full Name</th>
+                            <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Gender</th>
+                            <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Contact</th>
+                            <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Address</th>
+                            <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Action</th>
                             
 
                         </tr>

@@ -33,7 +33,7 @@ Route::post('/admin.set_time', [TimeController::class, 'setAttendanceTime'])->na
 
 
 
-Route::get('/', [AttendanceController::class, 'userPage']);
+Route::get('/', [AttendanceController::class, 'showAttendanceButtons']);
 
 Route::post('/', [AttendanceController::class, 'submitAttendance'])->name('attendance');
 

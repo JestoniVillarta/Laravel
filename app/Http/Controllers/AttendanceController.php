@@ -12,20 +12,39 @@ use Exception;
 
 
 class AttendanceController extends Controller
+
 {
-    public function userPage()
+    public function showAttendanceButtons()
     {
         // Get current time in Asia/Manila timezone
-        $current_time = Carbon::now('Asia/Manila')->format('h:i A');  
+        $current_time = Carbon::now('Asia/Manila');
     
         // Fetch time settings from the database
         $settings = Time::first();
     
         // Initialize button visibility
-        $show_morning_in = true;
-        $show_morning_out = true;
-        $show_afternoon_in = true;
-        $show_afternoon_out = true;
+        $show_morning_in = false;
+        $show_morning_out = false;
+        $show_afternoon_in = false;
+        $show_afternoon_out = false;
+    
+        if ($settings) {
+            // Parse the start and end times using Carbon with updated column names
+            $morning_in_start = Carbon::parse($settings->morning_time_in, 'Asia/Manila');
+            $morning_in_end = Carbon::parse($settings->morning_time_in_end, 'Asia/Manila');
+            $morning_out_start = Carbon::parse($settings->morning_time_out, 'Asia/Manila');
+            $morning_out_end = Carbon::parse($settings->morning_time_out_end, 'Asia/Manila');
+            $afternoon_in_start = Carbon::parse($settings->afternoon_time_in, 'Asia/Manila');
+            $afternoon_in_end = Carbon::parse($settings->afternoon_time_in_end, 'Asia/Manila');
+            $afternoon_out_start = Carbon::parse($settings->afternoon_time_out, 'Asia/Manila');
+            $afternoon_out_end = Carbon::parse($settings->afternoon_time_out_end, 'Asia/Manila');
+    
+            // Determine button visibility based on the current time
+            $show_morning_in = $current_time->between($morning_in_start, $morning_in_end);
+            $show_morning_out = $current_time->between($morning_out_start, $morning_out_end);
+            $show_afternoon_in = $current_time->between($afternoon_in_start, $afternoon_in_end);
+            $show_afternoon_out = $current_time->between($afternoon_out_start, $afternoon_out_end);
+        }
     
         return view('index', compact(
             'show_morning_in', 
@@ -34,6 +53,8 @@ class AttendanceController extends Controller
             'show_afternoon_out'
         ));
     }
+    
+
 
     public function showAttendance()
     {
