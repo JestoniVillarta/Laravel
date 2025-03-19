@@ -69,11 +69,16 @@ class AttendanceController extends Controller
     
 
 
+       
     public function showAttendance()
     {
         try {
-  
-            $attendances = Attendance::all();
+            // Get the current date
+            $currentDate = Carbon::today();
+    
+            // Fetch attendance records for the current date
+            $attendances = Attendance::whereDate('date', $currentDate)->get();
+    
             return view('admin.attendance', compact('attendances'));
             
         } catch (Exception $e) {
