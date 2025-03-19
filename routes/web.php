@@ -13,14 +13,12 @@ Route::get('/admin.dashboard', function () {
     return view('admin.dashboard'); // Main Dashboard View
 });
 
-Route::get('/admin.attendance', function () {
-    return view('admin.attendance'); // Documentation Page
-})->name('admin.attendance');
 
 Route::get('/admin.attendance', [AttendanceController::class, 'showAttendance'])->name('admin.attendance');
 
 
 Route::get('/admin.studentsList', [StudentController::class, 'index'])->name('admin.studentsList');
+
 
 Route::get('/admin.add_student', [StudentController::class, 'AddStudent'])->name('admin.add_student');
 
