@@ -25,9 +25,24 @@ Route::get('/admin.add_student', [StudentController::class, 'AddStudent'])->name
 Route::post('/admin.add_student', [StudentController::class, 'store'])->name('store');
 
 
+// Route to show the form to edit a student
+Route::get('/admin/edit/{id}', [StudentController::class, 'edit'])->name('admin.edit');
+
+// Route to update the student
+Route::put('/admin/update_student/{id}', [StudentController::class, 'update'])->name('admin.update_student');
+
+
+
+
+
+
+
 Route::get('/admin.set_time', [TimeController::class, 'showForm'])->name('admin.set_time');
 
 Route::post('/admin.set_time', [TimeController::class, 'setAttendanceTime'])->name('attendance.set-time');
+
+
+
 
 
 

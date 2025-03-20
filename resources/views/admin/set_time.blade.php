@@ -63,7 +63,8 @@
                                         <input type="time" id="morning_time_in" name="morning_time_in" value="{{ old('morning_time_in', $morning_time_in ?? '') }}" required class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
                                     </div>
                                     <div class="flex items-center ">
-                                        <label for="morning_time_in_end" class="text-gray-700 mx-4">to</label>
+                                    <label for="morning_time_in_end" class="text-gray-700 mx-4 font-bold">&mdash;</label>
+
                                         <input type="time" id="morning_time_in_end" name="morning_time_in_end" value="{{ old('morning_time_in_end', $morning_time_in_end ?? '') }}" required class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
                                     </div>
 
@@ -80,8 +81,8 @@
                                     </div>
 
                                     <div class="flex items-center ">
-                                        <label for="morning_time_out_end" class="text-gray-700 mx-4">to</label>
-                                        <input type="time" id="morning_time_out_end" name="morning_time_out_end" value="{{ old('morning_time_out_end', $morning_time_out_end ?? '') }}" required class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
+                                    <label for="morning_time_in_end" class="text-gray-700 mx-4 font-bold">&mdash;</label>
+                                    <input type="time" id="morning_time_out_end" name="morning_time_out_end" value="{{ old('morning_time_out_end', $morning_time_out_end ?? '') }}" required class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
                                     </div>
 
                                 </div>
@@ -104,8 +105,8 @@
                                         <input type="time" id="afternoon_time_in" name="afternoon_time_in" value="{{ old('afternoon_time_in', $afternoon_time_in ?? '') }}" required class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
                                     </div>
                                     <div class="flex items-center ">
-                                        <label for="afternoon_time_in_end" class="text-gray-700 mx-4">to</label>
-                                        <input type="time" id="afternoon_time_in_end" name="afternoon_time_in_end" value="{{ old('afternoon_time_in_end', $afternoon_time_in_end ?? '') }}" required class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
+                                    <label for="morning_time_in_end" class="text-gray-700 mx-4 font-bold">&mdash;</label>
+                                    <input type="time" id="afternoon_time_in_end" name="afternoon_time_in_end" value="{{ old('afternoon_time_in_end', $afternoon_time_in_end ?? '') }}" required class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
                                     </div>
                                 </div>
 
@@ -116,8 +117,8 @@
                                         <input type="time" id="afternoon_time_out" name="afternoon_time_out" value="{{ old('afternoon_time_out', $afternoon_time_out ?? '') }}" required class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
                                     </div>
                                     <div class="flex items-center">
-                                        <label for="afternoon_time_out_end" class="text-gray-700 mx-4">to</label>
-                                        <input type="time" id="afternoon_time_out_end" name="afternoon_time_out_end" value="{{ old('afternoon_time_out_end', $afternoon_time_out_end ?? '') }}" required class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
+                                    <label for="morning_time_in_end" class="text-gray-700 mx-4 font-bold">&mdash;</label>
+                                    <input type="time" id="afternoon_time_out_end" name="afternoon_time_out_end" value="{{ old('afternoon_time_out_end', $afternoon_time_out_end ?? '') }}" required class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
                                     </div>
                                 </div>
                             </div>

@@ -62,5 +62,34 @@ class StudentController extends Controller
             return redirect()->back()->withErrors('An error occurred while trying to add the student.');
         }
     }
+
     
+ 
+    // Show form to edit student
+    public function edit($id)
+    {
+        $student = Student::findOrFail($id);
+        return view('admin.edit', compact('student'));
+    }
+
+    // Update student
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'student_id' => 'required|unique:students,student_id,'.$id,
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'gender' => 'required',
+            'contact' => 'required',
+            'address' => 'required',
+        ]);
+
+        $student = Student::findOrFail($id);
+        $student->update($request->all());
+
+        return redirect()->route('admin.studentsList')
+            ->with('success', 'Student updated successfully');
+    }
+
+
 }

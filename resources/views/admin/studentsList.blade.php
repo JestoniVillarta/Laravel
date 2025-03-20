@@ -1,5 +1,3 @@
-
-
 <x-navigation>
     <!DOCTYPE html>
     <html lang="en">
@@ -12,7 +10,7 @@
         <script src="https://cdn.tailwindcss.com"></script>
 
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
+            document.addEventListener("DOMContentLoaded", function() {
                 const modal = document.getElementById("successModal");
                 if (modal) {
                     setTimeout(() => {
@@ -22,7 +20,7 @@
                 }
             });
         </script>
-        
+
     </head>
 
     <body class="bg-gray-100 p-6">
@@ -44,34 +42,34 @@
             <div class="flex justify-between items-center pb-4">
                 <h2 class="text-lg font-semibold">Student List</h2>
 
-        
+
             </div>
 
             <!-- Search Input -->
             <div class="w-full flex justify-end mb-4 gap-4">
 
-               <!-- Gender Dropdown Filter -->
-<div>
-    <select id="genderFilter"
-        class="border border-gray-300 block bg-gray-100 text-sm text-gray-600 py-2 px-4 rounded-lg">
-        <option value="">All Genders</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-    </select>
-</div>
+                <!-- Gender Dropdown Filter -->
+                <div>
+                    <select id="genderFilter"
+                        class="border border-gray-300 block bg-gray-100 text-sm text-gray-600 py-2 px-4 rounded-lg">
+                        <option value="">All Genders</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
 
-<script>
-    document.getElementById("genderFilter").addEventListener("change", function () {
-        let genderValue = this.value.trim().toLowerCase();
-        let rows = document.querySelectorAll("tbody tr");
+                <script>
+                    document.getElementById("genderFilter").addEventListener("change", function() {
+                        let genderValue = this.value.trim().toLowerCase();
+                        let rows = document.querySelectorAll("tbody tr");
 
-        rows.forEach(row => {
-            let gender = row.cells[2].textContent.trim().toLowerCase(); // Ensure no extra spaces
+                        rows.forEach(row => {
+                            let gender = row.cells[2].textContent.trim().toLowerCase(); // Ensure no extra spaces
 
-            row.style.display = (genderValue === "" || gender === genderValue) ? "" : "none";
-        });
-    });
-</script>
+                            row.style.display = (genderValue === "" || gender === genderValue) ? "" : "none";
+                        });
+                    });
+                </script>
 
                 <div class="relative w-full sm:w-64">
                     <input type="text" id="searchInput"
@@ -86,21 +84,21 @@
                     </div>
                 </div>
 
-         
-            
-            <script>
-                document.getElementById("searchInput").addEventListener("input", function () {
-                    let filter = this.value.toLowerCase().trim();
-                    let rows = document.querySelectorAll("tbody tr");
-            
-                    rows.forEach(row => {
-                        let studentID = row.cells[0].textContent.toLowerCase();
-                        let fullName = row.cells[1].textContent.toLowerCase();
-            
-                        row.style.display = (studentID.includes(filter) || fullName.includes(filter)) ? "" : "none";
+
+
+                <script>
+                    document.getElementById("searchInput").addEventListener("input", function() {
+                        let filter = this.value.toLowerCase().trim();
+                        let rows = document.querySelectorAll("tbody tr");
+
+                        rows.forEach(row => {
+                            let studentID = row.cells[0].textContent.toLowerCase();
+                            let fullName = row.cells[1].textContent.toLowerCase();
+
+                            row.style.display = (studentID.includes(filter) || fullName.includes(filter)) ? "" : "none";
+                        });
                     });
-                });
-            </script>
+                </script>
 
 
                 <a href="/admin.add_student">
@@ -112,44 +110,49 @@
 
             <!-- Student List Table -->
             <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-				<div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-					<table class="min-w-full leading-normal" style="table-layout: auto; width: 100%;">
-                    <thead>
-                        <tr class="bg-gray-200 text-sm font-semibold text-gray-700">
-                       
-                            <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Student ID</th>
-                            <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Full Name</th>
-                            <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Gender</th>
-                            <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Contact</th>
-                            <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Address</th>
-                            <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Action</th>
-                            
+                <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                    <table class="min-w-full leading-normal" style="table-layout: auto; width: 100%;">
+                        <thead>
+                            <tr class="bg-gray-200 text-sm font-semibold text-gray-700">
 
-                        </tr>
-                    </thead>
-                    <tbody class="bg-gray-100 border-b">
-                        @foreach($all_students as $student)
+                                <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Student ID</th>
+                                <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Full Name</th>
+                                <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Gender</th>
+                                <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Contact</th>
+                                <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Address</th>
+                                <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Action</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-100 border-b">
+                            @foreach($all_students as $student)
                             <tr class="border-t hover:bg-gray-100">
-                        
+
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $student->student_id }}</td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $student->first_name }} {{ $student->last_name }}</td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $student->gender }}</td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $student->contact }}</td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $student->address }}</td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <a href="{{ url('/edit_student/'.$student->id) }}" class="text-blue-500 hover:underline">Edit</a>
+
+                                    <a href="{{ route('admin.edit', $student->id) }}" class="text-blue-600 hover:text-blue-900">
+                                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-xs">
+                                            Edit
+                                        </button>
+                                    </a>
                                     <span class="mx-2">|</span>
                                     <a href="{{ url('/delete_student/'.$student->id) }}" class="text-red-500 hover:underline" onclick="return confirm('Are you sure?')">Delete</a>
                                 </td>
 
-                                
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
 
-        </div>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
 
         </div>
 

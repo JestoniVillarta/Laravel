@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Attendance</title>
     <script src="https://cdn.tailwindcss.com"></script>
- 
-
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
 
 <div class="container mx-auto mt-10">
 
     <h1 class="text-3xl font-bold mb-5 text-center">TRAINEE ATTENDANCE SYSTEM</h1>
-
 
     <form action="{{ route('attendance') }}" method="POST" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
         @csrf
@@ -34,26 +36,45 @@
         
         <div class="flex justify-center gap-4">
 
-    @if ($show_morning_in)
-        <button type="submit" name="morning_in" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Morning Time In</button>
-    @endif
+            @if ($show_morning_in)
+                <button type="submit" name="morning_in" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Morning Time In</button>
+            @endif
 
-    @if ($show_morning_out)
-        <button type="submit" name="morning_out" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Morning Time Out</button>
-    @endif
+            @if ($show_morning_out)
+                <button type="submit" name="morning_out" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Morning Time Out</button>
+            @endif
 
-    @if ($show_afternoon_in)
-        <button type="submit" name="afternoon_in" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Afternoon Time In</button>
-    @endif
+            @if ($show_afternoon_in)
+                <button type="submit" name="afternoon_in" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Afternoon Time In</button>
+            @endif
 
-    @if ($show_afternoon_out)
-        <button type="submit" name="afternoon_out" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Afternoon Time Out</button>
-    @endif
+            @if ($show_afternoon_out)
+                <button type="submit" name="afternoon_out" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Afternoon Time Out</button>
+            @endif
     
-</div>
+        </div>
     </form>
 
 </div>
+
+<script>
+    // Check if any buttons are visible and disable the input if none are
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('button');
+        const inputField = document.getElementById('student_id');
+        let isButtonVisible = false;
+
+        buttons.forEach(button => {
+            if (getComputedStyle(button).display !== 'none') {
+                isButtonVisible = true;
+            }
+        });
+
+        if (!isButtonVisible) {
+            inputField.disabled = true;
+        }
+    });
+</script>
 
 </body>
 </html>
