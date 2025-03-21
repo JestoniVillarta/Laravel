@@ -136,13 +136,18 @@
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $student->address }}</td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 
-                                    <a href="{{ route('admin.edit', $student->id) }}" class="text-blue-600 hover:text-blue-900">
+                                    <a href="{{ url('admin/'.$student->id.'/edit')}}" class="text-blue-600 hover:text-blue-900">
                                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-xs">
                                             Edit
                                         </button>
                                     </a>
                                     <span class="mx-2">|</span>
-                                    <a href="{{ url('/delete_student/'.$student->id) }}" class="text-red-500 hover:underline" onclick="return confirm('Are you sure?')">Delete</a>
+                                    <a href="{{ url('/admin/'.$student->id). '/delete' }}" class="text-red-500 hover:underline" onclick="return confirm('Are you sure?')">
+                                        
+                                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
+                                            Delete
+                                        </button>
+                                </a>
                                 </td>
 
 

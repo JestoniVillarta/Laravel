@@ -26,9 +26,11 @@
             </div>
             @endif
 
-            <form action="{{ route('admin.update_student', $student->id) }}" method="POST">
+            <form action="{{ url('admin/'.$student->id.'/edit') }}" method="POST">
+
+            @method('PUT')
                 @csrf
-                @method('PUT')
+                
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -72,7 +74,7 @@
                 </div>
 
                 <div class="mt-6 flex items-center justify-between">
-                    <a href="{{ route('admin.students') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-sm font-medium">
+                    <a href="{{ route('admin.studentsList') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-sm font-medium">
                         Cancel
                     </a>
                     <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">

@@ -26,13 +26,12 @@ Route::post('/admin.add_student', [StudentController::class, 'store'])->name('st
 
 
 // Route to show the form to edit a student
-Route::get('/admin/edit/{id}', [StudentController::class, 'edit'])->name('admin.edit');
+Route::get('/admin/{id}/edit', [\App\Http\Controllers\StudentController::class, 'edit'])->name('admin.edit');
 
 // Route to update the student
-Route::put('/admin/update_student/{id}', [StudentController::class, 'update'])->name('admin.update_student');
+Route::put('/admin/{id}/edit',[\App\Http\Controllers\StudentController::class, 'update']);
 
-
-
+Route::get('/admin/{id}/delete',[\App\Http\Controllers\StudentController::class, 'destroy']);
 
 
 

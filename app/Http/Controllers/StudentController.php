@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Support\Facades\Log;
 use Exception;
 use Illuminate\Database\QueryException;
+
 
 class StudentController extends Controller
 {
@@ -65,31 +66,40 @@ class StudentController extends Controller
 
     
  
-    // Show form to edit student
-    public function edit($id)
-    {
-        $student = Student::findOrFail($id);
-        return view('admin.edit', compact('student'));
-    }
+// Show form to edit student
+public function edit(int $id)
+{
+    $student = Student::findOrFail($id);
+    return view('admin.edit', compact('student'));
+}
 
-    // Update student
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'student_id' => 'required|unique:students,student_id,'.$id,
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'gender' => 'required',
-            'contact' => 'required',
-            'address' => 'required',
-        ]);
+// Update student
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'student_id' => 'required|unique:student_tbl,student_id,'.$id,
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'gender' => 'required',
+        'contact' => 'required',
+        'address' => 'required',
+    ]);
 
-        $student = Student::findOrFail($id);
-        $student->update($request->all());
+    Student::findOrFail($id)->update($request->all());
 
-        return redirect()->route('admin.studentsList')
-            ->with('success', 'Student updated successfully');
-    }
+    return redirect()->route('admin.studentsList')
+        ->with('success', 'Student updated successfully');
+}
 
+
+
+public function destroy(int $id)
+{
+    Student::findOrFail($id)->delete();
+
+    return redirect()->route('admin.studentsList')
+        ->with('success', 'Student deleted successfully');
+
+}
 
 }
