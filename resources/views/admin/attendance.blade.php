@@ -93,7 +93,7 @@
                                 <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Morning Time Out</th>
                                 <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Afternoon Time In</th>
                                 <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Afternoon Time Out</th>
-                                <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Duty Hours</th>
+                                <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Total Duty Hours</th>
                                 <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Morning Status</th>
                                 <th style="background-color: #222d33;" class="px-3 py-3 border-2 border-gray-200  text-left text-xs text-white font-semibold text-gray-600 uppercase tracking-wider">Afternoon Status</th>
                             </tr>

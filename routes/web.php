@@ -14,6 +14,9 @@ Route::get('/admin.dashboard', function () {
 });
 
 
+
+
+
 Route::get('/admin.attendance', [AttendanceController::class, 'showAttendance'])->name('admin.attendance');
 
 
