@@ -3,9 +3,6 @@
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <script src="https://cdn.tailwindcss.com"></script>
 
-
-    <h1>Admin Login</h1>
-
     <form method="POST" action="{{ route('admin.login') }}">
         @csrf
 

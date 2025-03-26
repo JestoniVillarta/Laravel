@@ -9,7 +9,7 @@ Route::get('/', function () {
     return view('index'); // Main Dashboard View
 });
 
-Route::get('/admin.dashboard', function () {
+Route::get('/dashboard', function () {
     return view('admin.dashboard'); // Main Dashboard View
 });
 
@@ -57,9 +57,7 @@ Route::get('/admin/attendance/search', [AttendanceController::class, 'searchAtte
 
 
 
-Route::get('/login', function () {
-    return view('auth.login'); // Login Page
-})->name('login');
+
 
 
 require __DIR__.'/admin-auth.php';

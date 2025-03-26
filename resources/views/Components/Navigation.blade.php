@@ -139,9 +139,9 @@ function setUrlParamWithoutReload(name, value) {
             </svg>
         </button>
 
-        <a href="{{ route('login') }}" class="bg-green-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-gray-700 ml-auto">
-            Login
-        </a>
+        
+
+   
     </nav>
 
 
@@ -155,7 +155,7 @@ function setUrlParamWithoutReload(name, value) {
 
           
                 <!-- Dashboard -->
-                <a href="admin.dashboard" class="{{ request()->is('admin.dashboard') ? 'bg-gray-200 text-indigo-600 p-4 rounded-l-3xl' : 'p-4 rounded-md' }} flex items-center">
+                <a href="/dashboard" class="{{ request()->is('/dashboard') ? 'bg-gray-200 text-indigo-600 p-4 rounded-l-3xl' : 'p-4 rounded-md' }} flex items-center">
                     <svg class="w-7 h-7 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9M4 10v10h5v-6h6v6h5V10"></path>
                     </svg>
@@ -188,6 +188,18 @@ function setUrlParamWithoutReload(name, value) {
                     </svg>
                     <span class="font-medium ml-3 sidebar-label">Set Time</span>
                 </a>
+
+            
+                    <form method="POST" action="{{ route('admin.logout') }}">
+                        @csrf
+            
+                        <x-responsive-nav-link :href="route('admin.logout')"
+                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                            {{ __('Log Out') }}
+                        </x-responsive-nav-link>
+                    </form>
+          
 
             
     </div>
