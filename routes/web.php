@@ -32,9 +32,9 @@ Route::post('/admin.add_student', [StudentController::class, 'store'])->name('st
 Route::get('/admin/{id}/edit', [\App\Http\Controllers\StudentController::class, 'edit'])->name('admin.edit');
 
 // Route to update the student
-Route::put('/admin/{id}/edit',[\App\Http\Controllers\StudentController::class, 'update']);
+Route::put('/admin/{id}/edit', [\App\Http\Controllers\StudentController::class, 'update']);
 
-Route::get('/admin/{id}/delete',[\App\Http\Controllers\StudentController::class, 'destroy']);
+Route::get('/admin/{id}/delete', [\App\Http\Controllers\StudentController::class, 'destroy']);
 
 
 
@@ -61,3 +61,5 @@ Route::get('/login', function () {
     return view('auth.login'); // Login Page
 })->name('login');
 
+
+require __DIR__.'/admin-auth.php';

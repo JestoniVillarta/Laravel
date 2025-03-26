@@ -8,6 +8,10 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
         }),
-        tailwindcss(),
     ],
+    server: {
+        hmr: {
+            overlay: false,  // This will disable the overlay for HMR errors
+        },
+    },
 });
