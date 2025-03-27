@@ -4,6 +4,9 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TimeController;
+use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware('guest:admin')->group(function () {
@@ -25,6 +28,38 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
+    
+    
+
+
+
+Route::get('/attendance', [AttendanceController::class, 'showAttendance'])->name('admin.attendance');
+
+
+Route::get('/studentsList', [StudentController::class, 'index'])->name('admin.studentsList');
+
+
+Route::get('/add_student', [StudentController::class, 'AddStudent'])->name('admin.add_student');
+
+Route::post('/add_student', [StudentController::class, 'store'])->name('store');
+
+
+// Route to show the form to edit a student
+Route::get('/{id}/edit', [\App\Http\Controllers\StudentController::class, 'edit'])->name('admin.edit');
+
+// Route to update the student
+Route::put('/{id}/edit', [\App\Http\Controllers\StudentController::class, 'update']);
+
+Route::get('/{id}/delete', [\App\Http\Controllers\StudentController::class, 'destroy']);
+
+
+
+
+Route::get('/set_time', [TimeController::class, 'showForm'])->name('admin.set_time');
+
+Route::post('/admin.set_time', [TimeController::class, 'setAttendanceTime'])->name('attendance.set-time');
+
+Route::get('/admin/attendance/search', [AttendanceController::class, 'searchAttendance'])->name('attendance.search');
   
 
     Route::post('logout', [LoginController::class, 'destroy'])->name('admin.logout');

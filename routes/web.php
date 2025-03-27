@@ -9,50 +9,12 @@ Route::get('/', function () {
     return view('index'); // Main Dashboard View
 });
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard'); // Main Dashboard View
-});
-
-
-
-
-
-Route::get('/admin.attendance', [AttendanceController::class, 'showAttendance'])->name('admin.attendance');
-
-
-Route::get('/admin.studentsList', [StudentController::class, 'index'])->name('admin.studentsList');
-
-
-Route::get('/admin.add_student', [StudentController::class, 'AddStudent'])->name('admin.add_student');
-
-Route::post('/admin.add_student', [StudentController::class, 'store'])->name('store');
-
-
-// Route to show the form to edit a student
-Route::get('/admin/{id}/edit', [\App\Http\Controllers\StudentController::class, 'edit'])->name('admin.edit');
-
-// Route to update the student
-Route::put('/admin/{id}/edit', [\App\Http\Controllers\StudentController::class, 'update']);
-
-Route::get('/admin/{id}/delete', [\App\Http\Controllers\StudentController::class, 'destroy']);
-
-
-
-
-Route::get('/admin.set_time', [TimeController::class, 'showForm'])->name('admin.set_time');
-
-Route::post('/admin.set_time', [TimeController::class, 'setAttendanceTime'])->name('attendance.set-time');
-
-
-
-
-
 
 Route::get('/', [AttendanceController::class, 'showAttendanceButtons']);
 
 Route::post('/', [AttendanceController::class, 'submitAttendance'])->name('attendance');
 
-Route::get('/admin/attendance/search', [AttendanceController::class, 'searchAttendance'])->name('attendance.search');
+
 
 
 
