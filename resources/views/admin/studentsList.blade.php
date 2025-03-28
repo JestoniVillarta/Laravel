@@ -137,28 +137,45 @@
 
                                 <td class="flex justify-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
 
-                                    <a href="{{ url('admin/'.$student->id.'/edit')}}" class="text-blue-600 hover:text-blue-900">
-                                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-xs">
-                                            Edit
+
+                                    <!-- Edit Button -->
+                                    <a href="{{ url('admin/'.$student->id.'/edit')}}" class="relative text-blue-600 hover:text-blue-900 mr-2">
+                                        <button class="relative group bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-xs flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4h2m1.293 1.293a1 1 0 00-1.414 0L4 14.172V17h2.828l7.879-7.879a1 1 0 000-1.414L12.293 5.293z" />
+                                            </svg>
+                                            <!-- Tooltip Below -->
+                                            <span class="absolute top-full mt-1 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
+                                                Edit
+                                            </span>
                                         </button>
                                     </a>
-                                    <span class="mx-2">|</span>
-                                    <a href="{{ url('/admin/'.$student->id). '/delete' }}" class="text-red-500 hover:underline" onclick="return confirm('Are you sure?')">
-                                        
-                                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
-                                            Delete
+
+                                    <!-- Delete Button -->
+                                    <a href="{{ url('/admin/'.$student->id). '/delete' }}" class="relative text-red-500 hover:underline mr-2" onclick="return confirm('Are you sure?')">
+                                        <button class="relative group bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-1 12a2 2 0 01-2 2H8a2 2 0 01-2-2L5 7m5 4v6m4-6v6M3 7h18" />
+                                            </svg>
+                                            <!-- Tooltip Below -->
+                                            <span class="absolute top-full mt-1 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
+                                                Delete
+                                            </span>
                                         </button>
-                                </a>
+                                    </a>
 
-                                <span class="mx-2">|</span>
-
-                                <!-- View Records Button -->
-                                <a href="{{ url('/admin/student-records/' . $student->student_id) }}" class="text-green-600 hover:text-green-900">
-                                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded text-xs">
-                                        View Records
-                                    </button>
-                                </a>                                
-                                
+                                    <!-- View Records Button -->
+                                    <a href="{{ url('/admin/student-records/' . $student->student_id) }}" class="relative text-green-600 hover:text-green-900">
+                                        <button class="relative group bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded text-xs flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5c-4.2 0-7.8 2.9-9.4 7 1.6 4.1 5.2 7 9.4 7s7.8-2.9 9.4-7c-1.6-4.1-5.2-7-9.4-7zm0 2a5 5 0 110 10 5 5 0 010-10z" />
+                                            </svg>
+                                            <!-- Tooltip Below -->
+                                            <span class="absolute top-full mt-1 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
+                                                View Attendance Records
+                                            </span>
+                                        </button>
+                                    </a>
 
                                 </td>
 
