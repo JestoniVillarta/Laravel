@@ -56,7 +56,7 @@
             </div>
             <div class="mt-6">
                 <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-md transition" type="submit">Register</button>
-                <a href="/admin.studentsList" class="block mt-3 text-center bg-gray-400 hover:bg-gray-500 text-white font-bold py-3 rounded-md transition">Back</a>
+                <a href="/admin/studentsList" class="block mt-3 text-center bg-gray-400 hover:bg-gray-500 text-white font-bold py-3 rounded-md transition">Back</a>
             </div>
         </form>
     </div>
