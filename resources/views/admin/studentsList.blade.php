@@ -120,7 +120,7 @@
                                 <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Gender</th>
                                 <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Contact</th>
                                 <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Address</th>
-                                <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider">Action</th>
+                                <th style="background-color: #222d33;" class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-white uppercase tracking-wider"></th>
 
 
                             </tr>
@@ -134,7 +134,8 @@
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $student->gender }}</td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $student->contact }}</td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $student->address }}</td>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+
+                                <td class="flex justify-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
 
                                     <a href="{{ url('admin/'.$student->id.'/edit')}}" class="text-blue-600 hover:text-blue-900">
                                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-xs">
@@ -148,6 +149,17 @@
                                             Delete
                                         </button>
                                 </a>
+
+                                <span class="mx-2">|</span>
+
+                                <!-- View Records Button -->
+                                <a href="{{ url('/admin/student-records/' . $student->student_id) }}" class="text-green-600 hover:text-green-900">
+                                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded text-xs">
+                                        View Records
+                                    </button>
+                                </a>                                
+                                
+
                                 </td>
 
 

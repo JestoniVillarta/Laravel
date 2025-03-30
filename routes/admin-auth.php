@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TimeController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\StudentRecordsController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware('guest:admin')->group(function () {
@@ -43,6 +44,10 @@ Route::get('/add_student', [StudentController::class, 'AddStudent'])->name('admi
 
 Route::post('/add_student', [StudentController::class, 'store'])->name('store');
 
+Route::get('/student-records/{student_id}', [ StudentRecordsController::class, 'showStudentRecords'])->name('admin.student-records');
+
+
+
 
 // Route to show the form to edit a student
 Route::get('/{id}/edit', [\App\Http\Controllers\StudentController::class, 'edit'])->name('admin.edit');
@@ -52,6 +57,7 @@ Route::put('/{id}/edit', [\App\Http\Controllers\StudentController::class, 'updat
 
 Route::get('/{id}/delete', [\App\Http\Controllers\StudentController::class, 'destroy']);
 
+Route::post('/update/{id}', [StudentController::class, 'updateStudent'])->name('students.update');
 
 
 
@@ -59,7 +65,7 @@ Route::get('/set_time', [TimeController::class, 'showForm'])->name('admin.set_ti
 
 Route::post('/admin.set_time', [TimeController::class, 'setAttendanceTime'])->name('attendance.set-time');
 
-Route::get('/admin/attendance/search', [AttendanceController::class, 'searchAttendance'])->name('attendance.search');
+Route::get('/attendance/search', [AttendanceController::class, 'searchAttendance'])->name('attendance.search');
   
 
     Route::post('logout', [LoginController::class, 'destroy'])->name('admin.logout');

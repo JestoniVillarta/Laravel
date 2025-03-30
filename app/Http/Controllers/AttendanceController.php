@@ -195,6 +195,51 @@ class AttendanceController extends Controller
     
         return back()->with('success', '✅ Attendance recorded successfully!');
     }
-    
+
+  
+
+
+    public function updateStudent(Request $request, $id)
+    {
+        // Validate the request
+        $request->validate([
+            'new_student_id' => 'required|string|unique:student_tbl,student_id,' . $id . ',student_id', // Ensure unique ID
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender' => 'required|string|in:Male,Female',
+            'contact' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+        ]);
+
+        // Find the student by old ID
+        $student = Student::where('student_id', $id)->firstOrFail();
+
+        // Store old student ID before updating
+        $originalStudentId = $student->student_id;
+
+        // Update student record
+        $student->update([
+            'student_id' => $request->new_student_id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'contact' => $request->contact,
+            'address' => $request->address,
+        ]);
+
+        // Update all related attendance records
+        Attendance::where('student_id', $originalStudentId)->update([
+            'student_id' => $request->new_student_id,
+            'name' => $request->first_name . ' ' . $request->last_name,
+            'gender' => $request->gender,
+            'contact' => $request->contact,
+            'address' => $request->address,
+        ]);
+
+        return back()->with('success', '✅ Student information and attendance records updated successfully!');
+    }
+
+
+
 
 }

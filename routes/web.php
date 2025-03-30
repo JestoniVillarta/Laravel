@@ -17,9 +17,4 @@ Route::post('/', [AttendanceController::class, 'submitAttendance'])->name('atten
 
 
 
-
-
-
-
-
 require __DIR__.'/admin-auth.php';
