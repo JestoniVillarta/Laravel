@@ -40,17 +40,12 @@ Route::get('attendance', [AttendanceController::class, 'showAttendance'])->name(
 Route::get('studentsList', [StudentController::class, 'index'])->name('admin.studentsList');
 
 
-Route::get('add_student', [StudentController::class, 'AddStudent'])->name('admin.add_student');
-
 Route::post('add_student', [StudentController::class, 'store'])->name('store');
 
 Route::get('student-records/{student_id}', [ StudentRecordsController::class, 'showStudentRecords'])->name('admin.student-records');
 
 
 
-
-// Route to show the form to edit a student
-Route::get('{id}/edit', [\App\Http\Controllers\StudentController::class, 'edit'])->name('admin.edit');
 
 // Route to update the student
 Route::put('{id}/edit', [\App\Http\Controllers\StudentController::class, 'update']);

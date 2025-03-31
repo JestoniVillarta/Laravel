@@ -24,12 +24,8 @@ class StudentController extends Controller
         }
     }
 
-    // Display the Add_student.blade.php
-    public function AddStudent()
-    {
-        return view('admin.add_student');
-    }
 
+  
     // Save the student data
     public function store(Request $request)
     {
@@ -66,12 +62,7 @@ class StudentController extends Controller
 
     
  
-// Show form to edit student
-public function edit(int $id)
-{
-    $student = Student::findOrFail($id);
-    return view('admin.edit', compact('student'));
-}
+
 
 // Update student
 public function update(Request $request, $id)
