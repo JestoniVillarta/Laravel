@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/app.css')
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -157,11 +157,24 @@
         </div>
     </nav>
 
-    <script>
-        document.getElementById('adminDropdownButton').addEventListener('click', function() {
-            document.getElementById('adminDropdownMenu').classList.toggle('hidden');
+   
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropdownButton = document.getElementById("adminDropdownButton");
+        const dropdownMenu = document.getElementById("adminDropdownMenu");
+
+        dropdownButton.addEventListener("click", function (event) {
+            dropdownMenu.classList.toggle("hidden");
+            event.stopPropagation(); // Prevent click from reaching document
         });
-    </script>
+
+        document.addEventListener("click", function (event) {
+            if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.add("hidden");
+            }
+        });
+    });
+</script>
 
 
 
