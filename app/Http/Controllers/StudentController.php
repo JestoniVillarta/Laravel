@@ -17,7 +17,7 @@ class StudentController extends Controller
         try {
             $all_students = Student::all();
             return view('admin.studentsList', compact('all_students'));
-            
+
         } catch (Exception $e) {
             Log::error('Error fetching students: ' . $e->getMessage());
             return back()->withErrors('Unable to fetch students list at this time.');
@@ -25,7 +25,7 @@ class StudentController extends Controller
     }
 
 
-  
+
     // Save the student data
     public function store(Request $request)
     {
@@ -38,11 +38,11 @@ class StudentController extends Controller
             'contact' => 'required|string|min:10|max:15', // Ensure proper contact length
             'address' => 'required|string|max:500',
         ]);
-    
+
         try {
             // Use mass assignment (instead of manually assigning each attribute)
             Student::create($validatedData);
-    
+
             // Redirect back to student list with a success message
             return redirect()->route('admin.studentsList')->with('success', 'Student added successfully!');
         } catch (QueryException $e) {
@@ -51,7 +51,7 @@ class StudentController extends Controller
                 Log::error('Duplicate student ID error: ' . $e->getMessage());
                 return redirect()->back()->withInput()->withErrors(['student_id' => 'The student ID is already in use. Please use a different ID.']);
             }
-    
+
             Log::error('Error adding student: ' . $e->getMessage());
             return redirect()->back()->withErrors('An error occurred while trying to add the student.');
         } catch (Exception $e) {
@@ -60,8 +60,8 @@ class StudentController extends Controller
         }
     }
 
-    
- 
+
+
 
 
 // Update student

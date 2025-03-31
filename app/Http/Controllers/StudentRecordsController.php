@@ -12,16 +12,16 @@ class StudentRecordsController extends Controller
     {
         // Fetch student details
         $student = Student::where('student_id', $student_id)->firstOrFail();
-    
+
         // Fetch all attendance records for this student
         $attendances = Attendance::where('student_id', $student_id)
             ->orderBy('date', 'desc')
             ->get();
-    
+
         // Return the view with student and attendance records
         return view('admin.student-records', compact('student', 'attendances'));
     }
-    
-    
+
+
 }
 

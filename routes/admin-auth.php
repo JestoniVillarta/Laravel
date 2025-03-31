@@ -15,7 +15,7 @@ Route::prefix('admin')->middleware('guest:admin')->group(function () {
     Route::get('register', [RegisteredAdminController::class, 'create'])->name('admin.register');
     Route::post('register', [RegisteredAdminController::class, 'store']);
 
-    
+
 
     Route::get('login', [LoginController::class, 'create'])->name('admin.login');
 
@@ -29,8 +29,8 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
-    
-    
+
+
 
 
 
@@ -61,7 +61,7 @@ Route::get('set_time', [TimeController::class, 'showForm'])->name('admin.set_tim
 Route::post('admin.set_time', [TimeController::class, 'setAttendanceTime'])->name('attendance.set-time');
 
 Route::get('attendance/search', [AttendanceController::class, 'searchAttendance'])->name('attendance.search');
-  
+
 
     Route::post('logout', [LoginController::class, 'destroy'])->name('admin.logout');
 });
