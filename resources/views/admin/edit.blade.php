@@ -1,4 +1,4 @@
-<!-- <x-navigation>
+<x-navigation>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -29,30 +29,30 @@
 
             @method('PUT')
                 @csrf
-                
+
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="student_id" class="block text-sm font-medium text-gray-700 mb-1">Student ID</label>
-                        <input type="text" name="student_id" id="student_id" value="{{ $student->student_id }}" 
+                        <input type="text" name="student_id" id="student_id" value="{{ $student->student_id }}"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     </div>
 
                     <div>
                         <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                        <input type="text" name="first_name" id="first_name" value="{{ $student->first_name }}" 
+                        <input type="text" name="first_name" id="first_name" value="{{ $student->first_name }}"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     </div>
 
                     <div>
                         <label for="last_name" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                        <input type="text" name="last_name" id="last_name" value="{{ $student->last_name }}" 
+                        <input type="text" name="last_name" id="last_name" value="{{ $student->last_name }}"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     </div>
 
                     <div>
                         <label for="gender" class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
-                        <select name="gender" id="gender" 
+                        <select name="gender" id="gender"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                             <option value="Male" {{ $student->gender == 'Male' ? 'selected' : '' }}>Male</option>
                             <option value="Female" {{ $student->gender == 'Female' ? 'selected' : '' }}>Female</option>
@@ -61,13 +61,13 @@
 
                     <div>
                         <label for="contact" class="block text-sm font-medium text-gray-700 mb-1">Contact</label>
-                        <input type="text" name="contact" id="contact" value="{{ $student->contact }}" 
+                        <input type="text" name="contact" id="contact" value="{{ $student->contact }}"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     </div>
 
                     <div>
                         <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Address</label>
-                        <input type="text" name="address" id="address" value="{{ $student->address }}" 
+                        <input type="text" name="address" id="address" value="{{ $student->address }}"
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     </div>
                 </div>
@@ -85,4 +85,4 @@
     </body>
 
     </html>
-</x-navigation> -->
+</x-navigation>

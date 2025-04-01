@@ -60,6 +60,11 @@ class StudentController extends Controller
         }
     }
 
+    public function edit(int $id)
+    {
+        $student = Student::findOrFail($id);
+        return view('admin.edit', compact('student'));
+    }
 
 
 

@@ -47,7 +47,10 @@ Route::get('student-records/{student_id}', [ StudentRecordsController::class, 's
 
 
 
+
 // Route to update the student
+Route::get('{id}/edit', [StudentController::class,'edit']);
+
 Route::put('{id}/edit', [\App\Http\Controllers\StudentController::class, 'update']);
 
 Route::get('/{id}/delete', [\App\Http\Controllers\StudentController::class, 'destroy']);

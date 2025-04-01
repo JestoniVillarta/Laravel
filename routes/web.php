@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\TimeController;
 use App\Http\Controllers\AttendanceController;
 
 Route::get('/', function () {

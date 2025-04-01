@@ -1,17 +1,23 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
-        }),
-    ],
-    server: {
-        hmr: {
-            overlay: false,  // This will disable the overlay for HMR errors
-        },
+  plugins: [
+    laravel({
+      input: ['resources/css/app.css', 'resources/js/app.js'],
+      refresh: true,
+    }),
+  ],
+
+  server: {
+    hmr: {
+        overlay: false,  // This will disable the overlay for HMR errors
     },
+},
+
 });
+
+
+
+
+

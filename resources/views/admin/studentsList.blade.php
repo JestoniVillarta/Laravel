@@ -1,4 +1,6 @@
 <x-navigation>
+    @include('components.student-modal')
+
     <!DOCTYPE html>
     <html lang="en">
 
@@ -113,18 +115,20 @@
 
 
 
-                <button onclick="openAddStudentModal()"
-                    class="flex items-center bg-blue-500 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+
+
+                <button onclick="openAddStudentModal()"    class="flex items-center bg-blue-500 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users-plus">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4c.96 0 1.84 .338 2.53 .901" />
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                        <path d="M16 19h6" />
-                        <path d="M19 16v6" />
-                    </svg>
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users-plus">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                    <path d="M3 21v-2a4 4 0 0 1 4 -4h4c.96 0 1.84 .338 2.53 .901" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    <path d="M16 19h6" />
+                    <path d="M19 16v6" />
+                </svg>
+
                     Add Student
                 </button>
 
@@ -210,27 +214,27 @@
 
                                                     <div class="py-2">
                                                         <!-- Edit Option -->
-                                                        <a href="#"
-                                                            onclick="openModal(
-                                                                  '{{ $student->id }}',
-                                                                  '{{ $student->student_id }}',
-                                                               '{{ $student->first_name }}',
-                                                               '{{ $student->last_name }}',
-                                                                '{{ $student->gender }}',
-                                                                 '{{ $student->contact }}',
-                                                                '{{ $student->address }}'
-                                                                      )"
+                                                        <a href="" onclick="openModal(
+                                                            '{{ $student->id }}',
+                                                            '{{ $student->student_id }}',
+                                                            '{{ addslashes($student->first_name) }}',
+                                                            '{{ addslashes($student->last_name) }}',
+                                                            '{{ $student->gender }}',
+                                                            '{{ $student->contact }}',
+                                                            '{{ addslashes($student->address) }}'
+                                                        )"
                                                             class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md mx-2">
-
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="w-4 h-4 mr-2 text-blue-500" fill="none"
-                                                                viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24"
+                                                                stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                                     d="M11 4h2m1.293 1.293a1 1 0 00-1.414 0L4 14.172V17h2.828l7.879-7.879a1 1 0 000-1.414L12.293 5.293z" />
                                                             </svg>
                                                             <span>Edit</span>
                                                         </a>
+
+                                                        <a href="{{ url('admin/'.$student->id.'/edit')}}">Edit</a>
+
+
 
 
                                                         <!-- Delete Option -->
@@ -270,114 +274,11 @@
                                     </td>
 
 
-                                    <!-- Add Student Button -->
 
 
-                                    <!-- Add Student Modal -->
-                                    <div id="addStudentModal"
-                                        class="fixed inset-0 hidden bg-gray-600 bg-opacity-50 flex justify-center items-center">
-                                        <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
-                                            <div class="pb-4 flex justify-between">
-                                                <h2 class="text-lg font-semibold">Register Student</h2>
-                                                <button onclick="closeAddStudentModal()"
-                                                    class="text-gray-500 hover:text-gray-700">&times;</button>
-                                            </div>
 
-                                            @if ($errors->any())
-                                                <div
-                                                    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                                                    <ul class="list-disc pl-5">
-                                                        @foreach ($errors->all() as $error)
-                                                            <li>{{ $error }}</li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            @endif
 
-                                            <!-- Registration Form -->
-                                            <form action="{{ route('store') }}" method="post">
-                                                @csrf
 
-                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                                    <div>
-                                                        <label for="new_student_id"
-                                                            class="block text-sm font-medium text-gray-700 mb-1">Student
-                                                            ID</label>
-                                                        <input type="text" name="student_id" id="new_student_id"
-                                                            placeholder="Enter Student ID"
-                                                            value="{{ old('student_id') }}" required
-                                                            class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                                    </div>
-                                                    <div>
-                                                        <label for="new_first_name"
-                                                            class="block text-sm font-medium text-gray-700 mb-1">First
-                                                            Name</label>
-                                                        <input type="text" name="first_name" id="new_first_name"
-                                                            placeholder="Enter First Name"
-                                                            value="{{ old('first_name') }}" required
-                                                            class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                                    </div>
-                                                    <div>
-                                                        <label for="new_last_name"
-                                                            class="block text-sm font-medium text-gray-700 mb-1">Last
-                                                            Name</label>
-                                                        <input type="text" name="last_name" id="new_last_name"
-                                                            placeholder="Enter Last Name"
-                                                            value="{{ old('last_name') }}" required
-                                                            class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                                    </div>
-                                                    <div>
-                                                        <label for="new_gender"
-                                                            class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
-                                                        <select name="gender" id="new_gender"
-                                                            value="{{ old('gender') }}" required
-                                                            class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                                            <option value="Male"
-                                                                {{ old('gender') == 'Male' ? 'selected' : '' }}>Male
-                                                            </option>
-                                                            <option value="Female"
-                                                                {{ old('gender') == 'Female' ? 'selected' : '' }}>
-                                                                Female</option>
-                                                        </select>
-                                                    </div>
-                                                    <div>
-                                                        <label for="new_contact"
-                                                            class="block text-sm font-medium text-gray-700 mb-1">Contact</label>
-                                                        <input type="text" name="contact" id="new_contact"
-                                                            placeholder="Enter Contact Number"
-                                                            value="{{ old('contact') }}" required
-                                                            class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                                    </div>
-                                                    <div>
-                                                        <label for="new_address"
-                                                            class="block text-sm font-medium text-gray-700 mb-1">Address</label>
-                                                        <input type="text" name="address" id="new_address"
-                                                            placeholder="Enter Address" value="{{ old('address') }}"
-                                                            required
-                                                            class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                                    </div>
-                                                </div>
-
-                                                <div class="mt-6 flex items-center justify-between">
-                                                    <button type="button" onclick="closeAddStudentModal()"
-                                                        class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-sm font-medium">Cancel</button>
-                                                    <button type="submit"
-                                                        class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">Register</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                    <!-- JavaScript for Modal -->
-                                    <script>
-                                        function openAddStudentModal() {
-                                            document.getElementById('addStudentModal').classList.remove('hidden');
-                                        }
-
-                                        function closeAddStudentModal() {
-                                            document.getElementById('addStudentModal').classList.add('hidden');
-                                        }
-                                    </script>
 
 
 
@@ -494,7 +395,10 @@
                                         function closeModal() {
                                             document.getElementById('editModal').classList.add('hidden');
                                         }
+
+
                                     </script>
+
 
 
                                     <!-- JavaScript for Dropdown Functionality -->
