@@ -1,6 +1,8 @@
 <x-navigation>
 
-    @include('components.student-modal')
+    @include('components.student-add-modal')
+    @include('components.student-edit-modal')
+
 
     <!DOCTYPE html>
     <html lang="en">
@@ -11,35 +13,10 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Student List</title>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const modal = document.getElementById("successModal");
-                if (modal) {
-                    setTimeout(() => {
-                        modal.classList.add("opacity-0", "transition-opacity", "duration-1000");
-                        setTimeout(() => modal.style.display = "none", 1000);
-                    }, 1000);
-                }
-            });
-        </script>
 
     </head>
 
     <body class="bg-gray-100 p-6">
-
-        <!-- Success Message -->
-        @if (session('success'))
-        <div id="successModal" class="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-50">
-            <div
-                class="bg-green-100 text-green-700 px-6 py-4 rounded-md shadow-md text-center transition-opacity duration-1000 flex items-center">
-                <svg class="w-6 h-6 text-green-700 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                {{ session('success') }}
-            </div>
-        </div>
-        @endif
 
 
         <div class="bg-white p-6 rounded-lg shadow-md w-full">
@@ -117,7 +94,8 @@
 
 
 
-                <button onclick="openAddStudentModal()" class="flex items-center bg-blue-500 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                <button onclick="openAddStudentModal()"
+                    class="flex items-center bg-blue-500 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users-plus">
@@ -169,215 +147,140 @@
                         </thead>
                         <tbody class="bg-gray-100 border-b">
                             @foreach ($students as $student)
-                            <tr class="border-t hover:bg-gray-100">
+                                <tr class="border-t hover:bg-gray-100">
 
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    {{ $student->student_id }}
-                                </td>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    {{ $student->first_name }} {{ $student->last_name }}
-                                </td>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    {{ $student->gender }}
-                                </td>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    {{ $student->contact }}
-                                </td>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    {{ $student->address }}
-                                </td>
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        {{ $student->student_id }}
+                                    </td>
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        {{ $student->first_name }} {{ $student->last_name }}
+                                    </td>
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        {{ $student->gender }}
+                                    </td>
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        {{ $student->contact }}
+                                    </td>
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        {{ $student->address }}
+                                    </td>
 
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm ">
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm ">
 
-                                    <!-- Options Dropdown Button -->
-                                    <div class="w-[100px]">
-
-
-                                        <div class="text-left w-[20%]">
-                                            <!-- Dropdown Button -->
-                                            <button id="optionsButton-{{ $student->id }}"
-                                                class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-3 py-2 rounded text-xs flex items-center"
-                                                onclick="toggleDropdown('{{ $student->id }}')">
-                                                <span>Options</span>
-                                                <svg id="dropdownIcon"
-                                                    class="w-5 h-5 text-white transition-transform duration-300"
-                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                    fill="currentColor">
-                                                    <path d="M12 16L6 9h12l-6 7z" />
-                                                </svg>
-
-                                            </button>
-
-                                            <!-- Dropdown Menu - Positioned Absolutely but Contained Within td -->
-                                            <div id="dropdown-{{ $student->id }}"
-                                                class=" hidden mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-20 ">
-
-                                                <div class="py-2">
-                                                    <!-- Edit Option -->
-                                 <!-- Edit Button -->
-<a href="javascript:void(0);" onclick="openModal('{{ $student->id }}')" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md mx-2">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4h2m1.293 1.293a1 1 0 00-1.414 0L4 14.172V17h2.828l7.879-7.879a1 1 0 000-1.414L12.293 5.293z" />
-    </svg>
-    <span>Edit</span>
-</a>
-
-<!-- Edit Modal -->
-<div id="editModal-{{ $student->id }}" class="fixed inset-0 hidden bg-gray-600 bg-opacity-75 flex justify-center items-center z-50">
-    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-4xl overflow-auto">
-        <div class="pb-4 flex justify-between">
-            <h2 class="text-lg font-semibold">Edit Student</h2>
-            <button onclick="closeModal('{{ $student->id }}')" class="text-gray-500 hover:text-gray-700">&times;</button>
-        </div>
-
-        <form action="{{ url('admin/' . $student->id . '/edit') }}" method="POST">
-            @method('PUT')
-            @csrf
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label for="student_id-{{ $student->id }}" class="block text-sm font-medium text-gray-700 mb-1">Student ID</label>
-                    <input type="text" name="student_id" id="student_id-{{ $student->id }}" value="{{ $student->student_id }}" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div>
-                    <label for="first_name-{{ $student->id }}" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                    <input type="text" name="first_name" id="first_name-{{ $student->id }}" value="{{ $student->first_name }}" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div>
-                    <label for="last_name-{{ $student->id }}" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                    <input type="text" name="last_name" id="last_name-{{ $student->id }}" value="{{ $student->last_name }}" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div>
-                    <label for="gender-{{ $student->id }}" class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
-                    <select name="gender" id="gender-{{ $student->id }}" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                        <option value="Male" {{ $student->gender == 'Male' ? 'selected' : '' }}>Male</option>
-                        <option value="Female" {{ $student->gender == 'Female' ? 'selected' : '' }}>Female</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="contact-{{ $student->id }}" class="block text-sm font-medium text-gray-700 mb-1">Contact</label>
-                    <input type="text" name="contact" id="contact-{{ $student->id }}" value="{{ $student->contact }}" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div>
-                    <label for="address-{{ $student->id }}" class="block text-sm font-medium text-gray-700 mb-1">Address</label>
-                    <input type="text" name="address" id="address-{{ $student->id }}" value="{{ $student->address }}" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-            </div>
-
-            <div class="mt-6 flex items-center justify-between">
-                <button type="button" onclick="closeModal('{{ $student->id }}')" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-sm font-medium">Cancel</button>
-                <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">Update Student</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- JavaScript for Modal -->
-<script>
-    function openModal(id) {
-        document.getElementById(`editModal-${id}`).classList.remove('hidden');
-    }
-
-    function closeModal(id) {
-        document.getElementById(`editModal-${id}`).classList.add('hidden');
-    }
-</script>
+                                        <!-- Options Dropdown Button -->
+                                        <div class="w-[100px]">
 
 
+                                            <div class="text-left w-[20%]">
+                                                <!-- Dropdown Button -->
+                                                <button id="optionsButton-{{ $student->id }}"
+                                                    class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-3 py-2 rounded text-xs flex items-center"
+                                                    onclick="toggleDropdown('{{ $student->id }}')">
+                                                    <span>Options</span>
+                                                    <svg id="dropdownIcon"
+                                                        class="w-5 h-5 text-white transition-transform duration-300"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        fill="currentColor">
+                                                        <path d="M12 16L6 9h12l-6 7z" />
+                                                    </svg>
+
+                                                </button>
+
+                                                <!-- Dropdown Menu - Positioned Absolutely but Contained Within td -->
+                                                <div id="dropdown-{{ $student->id }}"
+                                                    class=" hidden mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-20 ">
+
+                                                    <div class="py-2">
+                                                        <!-- Edit Option -->
+                                                        <!-- Edit Button -->
+                                                        <a href="javascript:void(0);"
+                                                            onclick="openModal('{{ $student->id }}')"
+                                                            class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md mx-2">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="w-4 h-4 mr-2 text-blue-500" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2"
+                                                                    d="M11 4h2m1.293 1.293a1 1 0 00-1.414 0L4 14.172V17h2.828l7.879-7.879a1 1 0 000-1.414L12.293 5.293z" />
+                                                            </svg>
+                                                            <span>Edit</span>
+                                                        </a>
 
 
+                                                        <!-- Delete Option -->
+                                                        <a href="{{ url('/admin/' . $student->id) . '/delete' }}"
+                                                            class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md mx-2"
+                                                            onclick="return confirm('Are you sure?')">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="w-4 h-4 mr-2 text-red-500" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2"
+                                                                    d="M19 7l-1 12a2 2 0 01-2 2H8a2 2 0 01-2-2L5 7m5 4v6m4-6v6M3 7h18" />
+                                                            </svg>
+                                                            <span>Delete</span>
+                                                        </a>
 
-
-
-
-
-
-
-                                                    <!-- Delete Option -->
-                                                    <a href="{{ url('/admin/' . $student->id) . '/delete' }}"
-                                                        class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md mx-2"
-                                                        onclick="return confirm('Are you sure?')">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="w-4 h-4 mr-2 text-red-500" fill="none"
-                                                            viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M19 7l-1 12a2 2 0 01-2 2H8a2 2 0 01-2-2L5 7m5 4v6m4-6v6M3 7h18" />
-                                                        </svg>
-                                                        <span>Delete</span>
-                                                    </a>
-
-                                                    <!-- View Records Option -->
-                                                    <a href="{{ url('/admin/student-records/' . $student->student_id) }}"
-                                                        class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md mx-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="w-5 h-5 mr-2 text-green-700" fill="none"
-                                                            viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke="none" d="M0 0h24v24H0z"
-                                                                fill="none" />
-                                                            <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                                            <path
-                                                                d="M12 18c-.328 0 -.652 -.017 -.97 -.05c-3.172 -.332 -5.85 -2.315 -8.03 -5.95c2.4 -4 5.4 -6 9 -6c3.465 0 6.374 1.853 8.727 5.558" />
-                                                            <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                                                            <path d="M20.2 20.2l1.8 1.8" />
-                                                        </svg>
-                                                        <span>View Attendance</span>
-                                                    </a>
+                                                        <!-- View Records Option -->
+                                                        <a href="{{ url('/admin/student-records/' . $student->student_id) }}"
+                                                            class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md mx-2">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="w-5 h-5 mr-2 text-green-700" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke="none" d="M0 0h24v24H0z"
+                                                                    fill="none" />
+                                                                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                                                <path
+                                                                    d="M12 18c-.328 0 -.652 -.017 -.97 -.05c-3.172 -.332 -5.85 -2.315 -8.03 -5.95c2.4 -4 5.4 -6 9 -6c3.465 0 6.374 1.853 8.727 5.558" />
+                                                                <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                                                                <path d="M20.2 20.2l1.8 1.8" />
+                                                            </svg>
+                                                            <span>View Attendance</span>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
 
 
+                                    <!-- JavaScript for Dropdown Functionality -->
+                                    <script>
+                                        function toggleDropdown(studentId) {
+                                            const dropdown = document.getElementById(`dropdown-${studentId}`);
+                                            const isOpen = dropdown.classList.contains('block');
 
+                                            // Close all other open dropdowns first
+                                            document.querySelectorAll('[id^="dropdown-"]').forEach(el => {
+                                                el.classList.add('hidden');
+                                                el.classList.remove('block');
+                                            });
 
-
-
-
-
-
-
-
-
-
-                                <!-- JavaScript for Dropdown Functionality -->
-                                <script>
-                                    function toggleDropdown(studentId) {
-                                        const dropdown = document.getElementById(`dropdown-${studentId}`);
-                                        const isOpen = dropdown.classList.contains('block');
-
-                                        // Close all other open dropdowns first
-                                        document.querySelectorAll('[id^="dropdown-"]').forEach(el => {
-                                            el.classList.add('hidden');
-                                            el.classList.remove('block');
-                                        });
-
-                                        // Toggle the current dropdown
-                                        if (isOpen) {
-                                            dropdown.classList.add('hidden');
-                                            dropdown.classList.remove('block');
-                                        } else {
-                                            dropdown.classList.add('block');
-                                            dropdown.classList.remove('hidden');
-                                        }
-
-                                        // Close dropdown when clicking outside
-                                        document.addEventListener('click', function closeDropdown(e) {
-                                            const button = document.getElementById(`optionsButton-${studentId}`);
-                                            if (!dropdown.contains(e.target) && e.target !== button) {
+                                            // Toggle the current dropdown
+                                            if (isOpen) {
                                                 dropdown.classList.add('hidden');
                                                 dropdown.classList.remove('block');
-                                                document.removeEventListener('click', closeDropdown);
+                                            } else {
+                                                dropdown.classList.add('block');
+                                                dropdown.classList.remove('hidden');
                                             }
-                                        });
 
-                                        // Prevent event from bubbling to document
-                                        event.stopPropagation();
-                                    }
-                                </script>
+                                            // Close dropdown when clicking outside
+                                            document.addEventListener('click', function closeDropdown(e) {
+                                                const button = document.getElementById(`optionsButton-${studentId}`);
+                                                if (!dropdown.contains(e.target) && e.target !== button) {
+                                                    dropdown.classList.add('hidden');
+                                                    dropdown.classList.remove('block');
+                                                    document.removeEventListener('click', closeDropdown);
+                                                }
+                                            });
 
-                            </tr>
+                                            // Prevent event from bubbling to document
+                                            event.stopPropagation();
+                                        }
+                                    </script>
+
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

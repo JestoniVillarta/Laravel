@@ -1,4 +1,4 @@
-<!-- Edit Modal -->
+{{-- <!-- Edit Modal -->
 <div id="editModal-{{ $student->id }}" class="fixed inset-0 hidden bg-gray-600 bg-opacity-50 flex justify-center items-center">
     <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-4xl">
         <div class="pb-4 flex justify-between">
@@ -61,4 +61,4 @@
 
 
 
-
+ --}}
