@@ -40,7 +40,7 @@ Route::get('attendance', [AttendanceController::class, 'showAttendance'])->name(
 Route::get('studentsList', [StudentController::class, 'index'])->name('admin.studentsList');
 
 
-Route::post('add_student', [StudentController::class, 'store'])->name('store');
+Route::post('', [StudentController::class, 'store'])->name('store');
 
 Route::get('student-records/{student_id}', [ StudentRecordsController::class, 'showStudentRecords'])->name('admin.student-records');
 
