@@ -50,6 +50,27 @@
                 margin: 0 auto;
                 padding: 1.5rem;
                 box-sizing: border-box;
+
+            }
+
+            .table-container {
+
+                overflow-y: auto;
+         
+                max-height: 70vh;
+            
+            }
+
+            thead {
+
+                position: sticky;
+                top: 0;
+
+                z-index: 1000;
+
+                background-color: #343a40;
+
+
             }
 
             @media (max-width: 768px) {
@@ -90,7 +111,7 @@
                         document.getElementById('searchForm').submit();
                     });
 
-                    document.getElementById("searchInput").addEventListener("input", function () {
+                    document.getElementById("searchInput").addEventListener("input", function() {
                         let filter = this.value.toLowerCase().trim();
                         let rows = document.querySelectorAll("tbody tr");
 
@@ -105,55 +126,58 @@
             </script>
 
             <!-- Attendance Table -->
-            <div class="table-responsive">
-                <table class="table table-bordered custom-table">
-                    <thead>
-                        <tr>
-                            <th class="text-center">Student ID</th>
-                            <th class="text-center">Name</th>
-                            <th class="text-center">Gender</th>
-                            <th class="text-center">Date</th>
-                            <th class="text-center">Morning Time In</th>
-                            <th class="text-center">Morning Time Out</th>
-                            <th class="text-center">Afternoon Time In</th>
-                            <th class="text-center">Afternoon Time Out</th>
-                            <th class="text-center">Total Duty Hours</th>
-                            <th class="text-center">Morning Status</th>
-                            <th class="text-center">Afternoon Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($attendances as $attendance)
-                        <tr>
-                            <td class="text-center">{{ $attendance->student_id }}</td>
-                            <td class="text-center">{{ $attendance->name }}</td>
-                            <td class="text-center">{{ $attendance->gender }}</td>
-                            <td class="text-center">{{ $attendance->date }}</td>
-                            <td class="text-center">{{ $attendance->morning_time_in ?? '' }}</td>
-                            <td class="text-center">{{ $attendance->morning_time_out ?? '' }}</td>
-                            <td class="text-center">{{ $attendance->afternoon_time_in ?? '' }}</td>
-                            <td class="text-center">{{ $attendance->afternoon_time_out ?? '' }}</td>
-                            <td class="text-center">{{ $attendance->duty_hours ?? '0.00' }}</td>
-                            <td class="text-center">
-                                <span class="text-{{ $attendance->morning_status === 'Present' ? 'success' : 'danger' }}">
-                                    {{ $attendance->morning_status ?? 'Absent' }}
-                                </span>
-                            </td>
-                            <td class="text-center">
-                                <span class="text-{{ $attendance->afternoon_status === 'Present' ? 'success' : 'danger' }}">
-                                    {{ $attendance->afternoon_status ?? 'Absent' }}
-                                </span>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="11" class="text-center py-4">No attendance records available.</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+            <div class="table-container">
+            <table class="table table-striped table-bordered table-hover mb-0 custom-table">
+                <thead class="table-dark">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Student ID</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Gender</th>
+                                <th class="text-center">Date</th>
+                                <th class="text-center">Morning Time In</th>
+                                <th class="text-center">Morning Time Out</th>
+                                <th class="text-center">Afternoon Time In</th>
+                                <th class="text-center">Afternoon Time Out</th>
+                                <th class="text-center">Total Duty Hours</th>
+                                <th class="text-center">Morning Status</th>
+                                <th class="text-center">Afternoon Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($attendances as $attendance)
+                            <tr>
+                                <td>{{ $attendance->student_id }}</td>
+                                <td>{{ $attendance->name }}</td>
+                                <td>{{ $attendance->gender }}</td>
+                                <td>{{ $attendance->date }}</td>
+                                <td>{{ $attendance->morning_time_in ?? '' }}</td>
+                                <td>{{ $attendance->morning_time_out ?? '' }}</td>
+                                <td>{{ $attendance->afternoon_time_in ?? '' }}</td>
+                                <td>{{ $attendance->afternoon_time_out ?? '' }}</td>
+                                <td>{{ $attendance->duty_hours ?? '0.00' }}</td>
+                                <td>
+                                    <span class="text-{{ $attendance->morning_status === 'Present' ? 'success' : 'danger' }}">
+                                        {{ $attendance->morning_status ?? 'Absent' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="text-{{ $attendance->afternoon_status === 'Present' ? 'success' : 'danger' }}">
+                                        {{ $attendance->afternoon_status ?? 'Absent' }}
+                                    </span>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="11" class="text-center py-4">No attendance records available.</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </body>
+
     </html>
 </x-navigation>

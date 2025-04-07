@@ -1,61 +1,147 @@
-<x-navigation>
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Attendance Records</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Attendance Records</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+            margin-top: 30px;
+        }
+        
+        .card-title {
+            color: #333;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+        
+        .table th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .table td {
+            font-size: 0.9rem;
+            vertical-align: middle;
+        }
+        
+        .table-hover tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .status-present {
+            color: #198754;
+            font-weight: 500;
+        }
+        
+        .status-absent {
+            color: #dc3545;
+            font-weight: 500;
+        }
+        
+        .back-button {
+            background-color: #0d6efd;
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background-color: #0b5ed7;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .table-responsive {
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .card {
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
 
-    <body class="bg-gray-100 p-6">
-        <div class="bg-white p-6 rounded-lg shadow-md w-full">
-            <h2 class="text-xl font-bold mb-3">{{ $student->first_name }} {{ $student->last_name }} - Attendance Records</h2>
-            <table class="min-w-full leading-normal border-collapse border border-gray-300">
-                <thead>
-                    <tr class="bg-gray-200 text-sm font-semibold text-gray-700">
-                        <th class="px-3 py-2 border border-gray-300 text-left text-xs text-gray-600 uppercase">Date</th>
-                        <th class="px-3 py-2 border border-gray-300 text-left text-xs text-gray-600 uppercase">Morning In</th>
-                        <th class="px-3 py-2 border border-gray-300 text-left text-xs text-gray-600 uppercase">Morning Out</th>
-                        <th class="px-3 py-2 border border-gray-300 text-left text-xs text-gray-600 uppercase">Afternoon In</th>
-                        <th class="px-3 py-2 border border-gray-300 text-left text-xs text-gray-600 uppercase">Afternoon Out</th>
-                        <th class="px-3 py-2 border border-gray-300 text-left text-xs text-gray-600 uppercase">Morning Status</th>
-                        <th class="px-3 py-2 border border-gray-300 text-left text-xs text-gray-600 uppercase">Afternoon Status</th>
-                        <th class="px-3 py-2 border border-gray-300 text-left text-xs text-gray-600 uppercase">Duty Hours</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-gray-100 border-b">
-                    @forelse($attendances as $attendance)
-                        <tr class="border-t hover:bg-gray-100">
-                            <td class="px-3 py-2 border border-gray-300 bg-white text-sm">{{ $attendance->date }}</td>
-                            <td class="px-3 py-2 border border-gray-300 bg-white text-sm">{{ $attendance->morning_time_in ?? '--' }}</td>
-                            <td class="px-3 py-2 border border-gray-300 bg-white text-sm">{{ $attendance->morning_time_out ?? '--' }}</td>
-                            <td class="px-3 py-2 border border-gray-300 bg-white text-sm">{{ $attendance->afternoon_time_in ?? '--' }}</td>
-                            <td class="px-3 py-2 border border-gray-300 bg-white text-sm">{{ $attendance->afternoon_time_out ?? '--' }}</td>
-                            <td class="px-3 py-2 border border-gray-300 bg-white text-sm">
-                                <span class="{{ $attendance->morning_status === 'Present' ? 'text-green-600' : 'text-red-600' }}">
-                                    {{ $attendance->morning_status ?? 'Absent' }}
-                                </span>
-                            </td>
-                            <td class="px-3 py-2 border border-gray-300 bg-white text-sm">
-                                <span class="{{ $attendance->afternoon_status === 'Present' ? 'text-green-600' : 'text-red-600' }}">
-                                    {{ $attendance->afternoon_status ?? 'Absent' }}
-                                </span>
-                            </td>
-                            <td class="px-3 py-2 border border-gray-300 bg-white text-sm">{{ $attendance->duty_hours }}</td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="8" class="text-center border border-gray-300 px-4 py-2">No attendance records found.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-            <a href="{{ url('/admin/studentsList') }}" class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Back to Student List
-            </a>
+<body>
+    <div class="container py-4">
+        <div class="card">
+            <div class="card-body p-4">
+                <h2 class="card-title fw-bold mb-4">{{ $student->first_name }} {{ $student->last_name }} - Attendance Records</h2>
+                <div class="table-responsive mb-3">
+                    <table class="table table-bordered table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Morning In</th>
+                                <th>Morning Out</th>
+                                <th>Afternoon In</th>
+                                <th>Afternoon Out</th>
+                                <th>Morning Status</th>
+                                <th>Afternoon Status</th>
+                                <th>Duty Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($attendances as $attendance)
+                                <tr>
+                                    <td>{{ $attendance->date }}</td>
+                                    <td>{{ $attendance->morning_time_in ?? '--' }}</td>
+                                    <td>{{ $attendance->morning_time_out ?? '--' }}</td>
+                                    <td>{{ $attendance->afternoon_time_in ?? '--' }}</td>
+                                    <td>{{ $attendance->afternoon_time_out ?? '--' }}</td>
+                                    <td>
+                                        <span class="{{ $attendance->morning_status === 'Present' ? 'status-present' : 'status-absent' }}">
+                                            {{ $attendance->morning_status ?? 'Absent' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="{{ $attendance->afternoon_status === 'Present' ? 'status-present' : 'status-absent' }}">
+                                            {{ $attendance->afternoon_status ?? 'Absent' }}
+                                        </span>
+                                    </td>
+                                    <td>{{ $attendance->duty_hours }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="text-center py-3">No attendance records found.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <a href="{{ url('/admin/studentsList') }}" class="btn back-button text-white">
+                    <i class="bi bi-arrow-left me-1"></i> Back to Student List
+                </a>
+            </div>
         </div>
-    </body>
-    </html>
-</x-navigation>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</body>
+</html>

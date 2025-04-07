@@ -22,7 +22,7 @@
 
         #content {
             transition: all 0.3s;
-            min-height: 100vh;
+            height:100vh;
             padding-top: 70px;
             margin-left: 250px; /* Match sidebar width */
             width: calc(100% - 250px); /* Adjust width to account for sidebar */
