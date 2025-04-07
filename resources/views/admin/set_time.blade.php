@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Set Attendance Time</title>
     <!-- Bootstrap CSS -->
-   
+
 </head>
 
 <style>
-   
+
 
       .time-wrapper {
         width: 95%;
@@ -21,7 +21,7 @@
         box-sizing: border-box;
     }
 
-    form {
+    .form {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -31,7 +31,7 @@
 
    .time-container {
    width: 70%;
- 
+
    }
 
     input[type="time"] {
@@ -48,7 +48,7 @@
 
             <div class="col-lg-8">
                 <div class="card shadow mt-5">
-                
+
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="col-md-10">
@@ -58,7 +58,7 @@
                                         {{ session('success') }}
                                     </div>
                                     @endif
-                                    
+
                                     @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul>
@@ -68,14 +68,14 @@
                                         </ul>
                                     </div>
                                     @endif
-                                    
-                                    <form action="{{ route('attendance.set-time') }}" method="post">
+
+                                    <form action="{{ route('attendance.set-time') }}" method="post" class="form">
                                         @csrf
                                         <div class="time-container mb-4">
                                             <div class="text-center mb-4">
                                                 <h4 class="badge bg-secondary p-2 fs-5">MORNING</h4>
                                             </div>
-                                            
+
                                             <div class="row mb-3">
                                                 <label for="morning_time_in" class="col-sm-3 col-form-label">Time In:</label>
                                                 <div class="col-sm-4">
@@ -88,7 +88,7 @@
                                                     <input type="time" id="morning_time_in_end" name="morning_time_in_end" value="{{ old('morning_time_in_end', $morning_time_in_end ?? '') }}" required class="form-control">
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="row mb-3">
                                                 <label for="morning_time_out" class="col-sm-3 col-form-label">Time Out:</label>
                                                 <div class="col-sm-4">
@@ -104,11 +104,11 @@
 
                                             <br>
                                             <br>
-                                            
+
                                             <div class="text-center my-4">
                                                 <h4 class="badge bg-secondary p-2 fs-5">AFTERNOON</h4>
                                             </div>
-                                            
+
                                             <div class="row mb-3">
                                                 <label for="afternoon_time_in" class="col-sm-3 col-form-label">Time In:</label>
                                                 <div class="col-sm-4">
@@ -121,7 +121,7 @@
                                                     <input type="time" id="afternoon_time_in_end" name="afternoon_time_in_end" value="{{ old('afternoon_time_in_end', $afternoon_time_in_end ?? '') }}" required class="form-control">
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="row mb-3">
                                                 <label for="afternoon_time_out" class="col-sm-3 col-form-label">Time Out:</label>
                                                 <div class="col-sm-4">
@@ -135,7 +135,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="d-flex justify-content-end mt-4">
                                             <button type="submit" class="btn btn-primary">Set Time</button>
                                         </div>
@@ -148,7 +148,7 @@
             </div>
         </div>
     </div>
-    
+
 
 </body>
 </html>

@@ -57,16 +57,12 @@
             min-height: 1.75rem;
         }
 
-        .sidebar-active {
-            background-color: #e9ecef;
-            color: #0d6efd;
-            border-radius: 0 1.5rem 1.5rem 0;
-        }
 
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 1rem;
+
+
+
+        .nav-link:hover {
+            color: rgb(163, 165, 167);
         }
 
         #navbar {
@@ -78,6 +74,21 @@
             z-index: 999;
             background-color: #ffffff;
         }
+
+        .logo-container {
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 15vh;
+        }
+
+        .sidebar-logo {
+            transition: all 0.3s;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
     </style>
 
     <script>
@@ -99,6 +110,7 @@
             const content = document.getElementById("content");
             const toggleButton = document.getElementById("toggleButton");
             const navbar = document.getElementById("navbar");
+            const logo = document.getElementById("sidebar-logo");
             const sidebarLabels = document.querySelectorAll(".sidebar-label");
             const sidebarCategories = document.querySelectorAll(".sidebar-category");
 
@@ -107,6 +119,9 @@
                 content.style.marginLeft = "250px";
                 content.style.width = "calc(100% - 250px)";
                 toggleButton.style.left = "260px";
+
+                logo.style.width = "80px";
+                logo.style.height = "80px";
 
                 if (navbar) {
                     navbar.style.left = "250px";
@@ -120,6 +135,11 @@
                 content.style.marginLeft = "70px";
                 content.style.width = "calc(100% - 70px)";
                 toggleButton.style.left = "75px";
+
+                logo.style.width = "40px";
+                logo.style.height = "40px";
+
+
 
                 if (navbar) {
                     navbar.style.left = "70px";
@@ -155,16 +175,16 @@
 </head>
 
 <body class="bg-light">
-    <div id="sidebar" style="width: 250px;">
-        <div class="d-flex justify-content-center mt-4">
-            <img src="{{ asset('img/logo.png') }}" alt="" class="rounded-circle"
-                style="width: 80px; height: 80px; object-fit: cover;">
+    <div id="sidebar" style="width: 250px;" class="px-1 ">
+        <div class="d-flex justify-content-center align-items-center " style="height: 15vh">
+            <img id="sidebar-logo" src="{{ asset('img/logo.png') }}" alt="Logo" class="sidebar-logo "
+                style="width: 80px; height: 80px;">
         </div>
 
-        <div class="nav flex-column mt-4">
+        <div class="nav flex-column gap-3">
             <!-- Dashboard -->
             <a href="{{ route('admin.dashboard') }}"
-                class="nav-link {{ request()->is('admin/dashboard') ? 'sidebar-active' : '' }}">
+                class="nav-link {{ request()->is('admin/dashboard') ? 'bg-dark-subtle text-black fw-bold  rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                     class="sidebar-icon" viewBox="0 0 16 16">
                     <path
@@ -179,7 +199,7 @@
 
             <!-- Attendance -->
             <a href="{{ route('admin.attendance') }}"
-                class="nav-link {{ request()->is('admin/attendance') ? 'sidebar-active' : '' }}">
+                class="nav-link {{ request()->is('admin/attendance') ? 'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" class="sidebar-icon">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -190,7 +210,7 @@
 
             <!-- Students List -->
             <a href="{{ route('admin.studentsList') }}"
-                class="nav-link {{ request()->is('admin/studentsList') ? 'sidebar-active' : '' }}">
+                class="nav-link {{ request()->is('admin/studentsList') ? 'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" class="sidebar-icon">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -202,7 +222,7 @@
 
             <!-- Set Time -->
             <a href="{{ route('admin.set_time') }}"
-                class="nav-link {{ request()->is('admin/set_time') ? 'sidebar-active' : '' }}">
+                class="nav-link {{ request()->is('admin/set_time') ? 'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor" class="sidebar-icon">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -225,15 +245,15 @@
             </button>
 
             <div class="dropdown ms-auto">
-                <button id="adminDropdownButton" class="btn btn-light d-flex align-items-center gap-2 border-0"
-                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('img/admin.jpg') }}" alt="Admin Image" class="rounded-circle"
+                <button id="adminDropdownButton" class="btn btn-light d-flex align-items-center gap-2 border-0 dropdown-toggle"
+                    type="button" class="" data-bs-toggle="dropdown" aria-expanded="false" >
+                    <img src="{{ asset('img/admin.jpg') }}" alt="Admin Image" class="rounded-circle "
                         style="width: 50px; height: 50px; object-fit: cover;">
                     <span class="text-secondary">Admin</span>
                     <i class="bi bi-chevron-down"></i>
                 </button>
 
-                <ul id="adminDropdownMenu" class="dropdown-menu dropdown-menu-end shadow">
+                <ul id="adminDropdownMenu" class="dropdown-menu dropdown-menu-end shadow ">
                     <li>
                         <form method="POST" action="{{ route('admin.logout') }}">
                             @csrf

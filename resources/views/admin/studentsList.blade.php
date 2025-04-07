@@ -20,37 +20,45 @@
             margin: 0 auto;
             margin-top: 3rem;
             padding: 1.5rem;
-            box-sizing: border-box;
+
         }
 
         .table-container {
 
             overflow-y: auto;
-            /* Vertical scrolling if needed */
-            max-height: 70vh;
-            /* Maximum height for the table container */
+            max-height: 75vh;
+
         }
+
+
 
         thead {
 
             position: sticky;
             top: 0;
-            /* Position the header at the top of the container */
             z-index: 1000;
-            /* Ensure it stays above other elements */
             background-color: #343a40;
-            /* Match the background color for visual consistency */
+            height: 3.5rem;
 
+        }
+
+        td {
+            height: 4.5rem;
+
+        }
+
+        .dropdown-item {
+            font-weight: bold
         }
 
         /* Edit item styles */
         .edit-item {
-          
+
             color: #007bff;
         }
 
         .edit-item svg {
-          
+
             color: #007bff;
         }
 
@@ -140,29 +148,29 @@
 
             <!-- Student List Table -->
             <div class="table-container">
-                <table class="table table-striped ">
-                    <thead class="table-dark rounded">
+                <table class="table">
+                    <thead class="table-dark">
 
-                        <tr>
-                            <th>Student ID</th>
+                        <tr >
+                            <th style="border-top-left-radius: 10px">Student ID</th>
                             <th>Full Name</th>
                             <th>Gender</th>
                             <th>Contact</th>
                             <th>Address</th>
-                            <th>Actions</th>
+                            <th style="border-top-right-radius: 10px">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($students as $student)
-                        <tr>
-                            <td>{{ $student->student_id }}</td>
+                        <tr  class="align-middle">
+                            <td  class="px-3">{{ $student->student_id }}</td>
                             <td>{{ $student->first_name }} {{ $student->last_name }}</td>
                             <td>{{ $student->gender }}</td>
                             <td>{{ $student->contact }}</td>
                             <td>{{ $student->address }}</td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
                                         Options
                                     </button>
                                     <ul class="dropdown-menu">

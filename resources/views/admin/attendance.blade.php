@@ -56,9 +56,9 @@
             .table-container {
 
                 overflow-y: auto;
-         
+
                 max-height: 70vh;
-            
+
             }
 
             thead {
@@ -135,10 +135,10 @@
                                 <th class="text-center">Name</th>
                                 <th class="text-center">Gender</th>
                                 <th class="text-center">Date</th>
-                                <th class="text-center">Morning Time In</th>
-                                <th class="text-center">Morning Time Out</th>
-                                <th class="text-center">Afternoon Time In</th>
-                                <th class="text-center">Afternoon Time Out</th>
+                                <th class="text-center">Morning In</th>
+                                <th class="text-center">Morning Out</th>
+                                <th class="text-center">Afternoon In</th>
+                                <th class="text-center">Afternoon Out</th>
                                 <th class="text-center">Total Duty Hours</th>
                                 <th class="text-center">Morning Status</th>
                                 <th class="text-center">Afternoon Status</th>
