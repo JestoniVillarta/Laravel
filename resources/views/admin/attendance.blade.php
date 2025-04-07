@@ -85,7 +85,7 @@
         <!-- Using 95% width container centered with margin auto -->
         <div class="attendance-container bg-white rounded shadow-sm mt-4">
             <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
-                <h2 class="font-weight-bold">Attendance Records</h2>
+                <h2>Attendance Records</h2>
 
                 <div class="d-flex align-items-center gap-3 ">
                     <!-- Date Picker Form -->

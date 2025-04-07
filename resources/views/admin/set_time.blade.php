@@ -10,27 +10,45 @@
 </head>
 
 <style>
-      .time-container {
+   
+
+      .time-wrapper {
         width: 95%;
+       font-size: 15px;
         margin: 0 auto;
         margin-top: 3rem;
         padding: 1.5rem;
         box-sizing: border-box;
     }
+
+    form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 5rem;
+    }
+
+   .time-container {
+   width: 70%;
+ 
+   }
+
+    input[type="time"] {
+      font-size: 15px;
+    }
 </style>
 
 <body >
 
-    <div class="time-container  bg-white rounded shadow-sm mt-4">
+    <div class="time-wrapper  bg-white rounded shadow-sm mt-4">
         <div class="row justify-content-center">
 
-        <h2 class="h5 mb-0">Time Settings</h2>
+        <h2 >Time Settings</h2>
 
             <div class="col-lg-8">
-                <div class="card shadow">
-                    <div class="card-header">
-                        <h3 class="fw-bold">Set Attendance Time</h3>
-                    </div>
+                <div class="card shadow mt-5">
+                
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="col-md-10">

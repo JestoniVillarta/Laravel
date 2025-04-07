@@ -9,6 +9,18 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <style>
+        *{
+          font-family: "Gill Sans", sans-serif;
+          font-size: 15px;
+        }
+
+        h2 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+
         #sidebar {
             height: 100vh;
             transition: all 0.3s;
