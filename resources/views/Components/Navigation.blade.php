@@ -183,52 +183,49 @@
 
         <div class="nav flex-column gap-3">
             <!-- Dashboard -->
-            <a href="{{ route('admin.dashboard') }}"
-                class="nav-link {{ request()->is('admin/dashboard') ? 'bg-dark-subtle text-black fw-bold  rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                    class="sidebar-icon" viewBox="0 0 16 16">
-                    <path
-                        d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708z" />
-                    <path
-                        d="M11.07 9.047a1.5 1.5 0 0 0-1.742.26l-.02.021a1.5 1.5 0 0 0-.261 1.742 1.5 1.5 0 0 0 0 2.86 1.5 1.5 0 0 0-.12 1.07H3.5A1.5 1.5 0 0 1 2 13.5V9.293l6-6 4.724 4.724a1.5 1.5 0 0 0-1.654 1.03" />
-                    <path
-                        d="m13.158 9.608-.043-.148c-.181-.613-1.049-.613-1.23 0l-.043.148a.64.64 0 0 1-.921.382l-.136-.074c-.561-.306-1.175.308-.87.869l.075.136a.64.64 0 0 1-.382.92l-.148.045c-.613.18-.613 1.048 0 1.229l.148.043a.64.64 0 0 1 .382.921l-.074.136c-.306.561.308 1.175.869.87l.136-.075a.64.64 0 0 1 .92.382l.045.149c.18.612 1.048.612 1.229 0l.043-.15a.64.64 0 0 1 .921-.38l.136.074c.561.305 1.175-.309.87-.87l-.075-.136a.64.64 0 0 1 .382-.92l.149-.044c.612-.181.612-1.049 0-1.23l-.15-.043a.64.64 0 0 1-.38-.921l.074-.136c.305-.561-.309-1.175-.87-.87l-.136.075a.64.64 0 0 1-.92-.382ZM12.5 14a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
-                </svg>
-                <span class="ms-3 sidebar-label">Dashboard</span>
-            </a>
+            <a href="{{ route('admin.dashboard') }}" 
+   class="nav-link {{ request()->is('admin/dashboard') ? 'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }} d-flex align-items-center">
+   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+       class="sidebar-icon" viewBox="0 0 16 16">
+       <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708z" />
+       <path d="M11.07 9.047a1.5 1.5 0 0 0-1.742.26l-.02.021a1.5 1.5 0 0 0-.261 1.742 1.5 1.5 0 0 0 0 2.86 1.5 1.5 0 0 0-.12 1.07H3.5A1.5 1.5 0 0 1 2 13.5V9.293l6-6 4.724 4.724a1.5 1.5 0 0 0-1.654 1.03" />
+       <path d="m13.158 9.608-.043-.148c-.181-.613-1.049-.613-1.23 0l-.043.148a.64.64 0 0 1-.921.382l-.136-.074c-.561-.306-1.175.308-.87.869l.075.136a.64.64 0 0 1-.382.92l-.148.045c-.613.18-.613 1.048 0 1.229l.148.043a.64.64 0 0 1 .382.921l-.074.136c-.306.561.308 1.175.869.87l.136-.075a.64.64 0 0 1 .92.382l.045.149c.18.612 1.048.612 1.229 0l.043-.15a.64.64 0 0 1 .921-.38l.136.074c.561.305 1.175-.309.87-.87l-.075-.136a.64.64 0 0 1 .382-.92l.149-.044c.612-.181.612-1.049 0-1.23l-.15-.043a.64.64 0 0 1-.38-.921l.074-.136c.305-.561-.309-1.175-.87-.87l-.136.075a.64.64 0 0 1-.92-.382ZM12.5 14a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+   </svg>
+   <span class="sidebar-label ms-3 d-flex align-items-center">Dashboard</span>
+</a>
 
             <!-- Attendance -->
             <a href="{{ route('admin.attendance') }}"
-                class="nav-link {{ request()->is('admin/attendance') ? 'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }}">
+                class="nav-link {{ request()->is('admin/attendance') ? 'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }} d-flex align-items-center ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" class="sidebar-icon">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 12h6m-6 4h6M9 8h6m-8 8h10M4 4h16v16H4zM7 16l2 2 4-4"></path>
                 </svg>
-                <span class="ms-3 sidebar-label">Attendance</span>
+                <span class="ms-3 sidebar-label d-flex align-items-center">Attendance</span>
             </a>
 
             <!-- Students List -->
             <a href="{{ route('admin.studentsList') }}"
-                class="nav-link {{ request()->is('admin/studentsList') ? 'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }}">
+                class="nav-link {{ request()->is('admin/studentsList') ?  'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }} d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" class="sidebar-icon">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M17 20h5V8H2v12h5m10-12V4a2 2 0 00-2-2H9a2 2 0 00-2 2v4m5 4a4 4 0 110-8 4 4 0 010 8zm6 8a6 6 0 00-12 0">
                     </path>
                 </svg>
-                <span class="ms-3 sidebar-label">Students List</span>
+                <span class="ms-3 sidebar-label d-flex align-items-center">Students List</span>
             </a>
 
             <!-- Set Time -->
             <a href="{{ route('admin.set_time') }}"
-                class="nav-link {{ request()->is('admin/set_time') ? 'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }}">
+                class="nav-link {{ request()->is('admin/set_time') ? 'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }} d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor" class="sidebar-icon">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 8v4l3 3m5-3a9 9 0 11-6.32-8.94"></path>
                 </svg>
-                <span class="ms-3 sidebar-label">Set Time</span>
+                <span class="ms-3 sidebar-label d-flex align-items-center">Set Time</span>
             </a>
         </div>
     </div>

@@ -148,7 +148,7 @@
 
             <!-- Student List Table -->
             <div class="table-container">
-                <table class="table">
+                <table class="table border-2  ">
                     <thead class="table-dark">
 
                         <tr >

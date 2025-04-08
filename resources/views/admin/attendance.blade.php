@@ -14,6 +14,7 @@
             .custom-table th {
                 background-color: #222d33;
                 color: white;
+                border: 2px solid #222d33;
             }
 
             .custom-table tr:hover {
@@ -62,15 +63,10 @@
             }
 
             thead {
-
                 position: sticky;
                 top: 0;
-
                 z-index: 1000;
-
-                background-color: #343a40;
-
-
+             
             }
 
             @media (max-width: 768px) {
@@ -128,8 +124,8 @@
             <!-- Attendance Table -->
             <div class="table-container">
             <table class="table table-striped table-bordered table-hover mb-0 custom-table">
-                <thead class="table-dark">
-                        <thead>
+                     <thead class="table-dark">
+                       
                             <tr>
                                 <th class="text-center">Student ID</th>
                                 <th class="text-center">Name</th>
