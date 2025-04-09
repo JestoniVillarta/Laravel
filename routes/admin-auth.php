@@ -8,6 +8,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TimeController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\StudentRecordsController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware('guest:admin')->group(function () {
@@ -26,9 +27,8 @@ Route::prefix('admin')->middleware('guest:admin')->group(function () {
 
 Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
-    Route::get('dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
 
 
 

@@ -183,7 +183,7 @@
 
         <div class="nav flex-column gap-3">
             <!-- Dashboard -->
-            <a href="{{ route('admin.dashboard') }}" 
+            <a href="{{ route('admin.dashboard') }}"
    class="nav-link {{ request()->is('admin/dashboard') ? 'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }} d-flex align-items-center">
    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
        class="sidebar-icon" viewBox="0 0 16 16">
