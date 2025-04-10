@@ -121,14 +121,10 @@
                             <div class="d-flex justify-content-between">
                                 <div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        Morning: {{ $presentMorning }}
+                                        {{ $present }}
                                     </div>
                                 </div>
-                                <div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        Afternoon: {{ $presentAfternoon }}
-                                    </div>
-                                </div>
+                             
                             </div>
                         </div>
                     </div>
@@ -144,14 +140,10 @@
                             <div class="d-flex justify-content-between">
                                 <div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        Morning: {{ $absentMorning }}
+                                    {{ $absent }}
                                     </div>
                                 </div>
-                                <div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        Afternoon: {{ $absentAfternoon }}
-                                    </div>
-                                </div>
+                    
                             </div>
                         </div>
                     </div>
@@ -197,7 +189,7 @@
                                         <div class="col">
                                             <div class="progress progress-sm me-2">
                                                 <div class="progress-bar bg-success" role="progressbar"
-                                                    style="width: {{ $attendanceRate }}%">
+                                                    style="width: <?php echo e($attendanceRate); ?>%">
                                                 </div>
                                             </div>
                                         </div>
@@ -307,104 +299,91 @@
         <!-- Initialize Chart.js -->
         <script>
             var labels = {!! json_encode($dates) !!};
-            var presentData = {!! json_encode($presentData) !!};
-            var absentData = {!! json_encode($absentData) !!};
+    var presentData = {!! json_encode($presentData) !!};
+    var absentData = {!! json_encode($absentData) !!};
 
-            // Create morning and afternoon data arrays
-            var morningPresentData = [];
-            var morningAbsentData = [];
-            var afternoonPresentData = [];
-            var afternoonAbsentData = [];
+    // Create morning and afternoon data arrays
+    var morningPresentData = [];
+    var morningAbsentData = [];
 
-            // Populate morning and afternoon data
-            presentData.forEach(function(value) {
-                morningPresentData.push(value * 0.55); // Example morning present
-                afternoonPresentData.push(value * 0.45); // Example afternoon present
-            });
+    presentData.forEach(function(value) {
+        morningPresentData.push(value * 0.55);
+    });
 
-            absentData.forEach(function(value) {
-                morningAbsentData.push(value * 0.45); // Example morning absent
-                afternoonAbsentData.push(value * 0.55); // Example afternoon absent
-            });
+    absentData.forEach(function(value) {
+        morningAbsentData.push(value * 0.45);
+    });
 
-            var ctx = document.getElementById('attendanceChart').getContext('2d');
-            var attendanceChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels, // Dates as labels
-                    datasets: [
-                        // Morning Present Dataset
-                        {
-                            label: 'Morning Present',
-                            data: morningPresentData,
-                            backgroundColor: '#4e73df', // Blue for morning present
-                            borderColor: '#4e73df',
-                            borderWidth: 1,
-                            barPercentage: 0.35, // Make bars narrower to create space for the afternoon bars
-                            categoryPercentage: 0.8,
-                            stack: 'morning'
-                        },
-                        {
-                            label: 'Morning Absent',
-                            data: morningAbsentData,
-                            backgroundColor: '#e74a3b', // Red for morning absent
-                            borderColor: '#e74a3b',
-                            borderWidth: 1,
-                            barPercentage: 0.35,
-                            categoryPercentage: 0.8,
-                            stack: 'morning'
-                        },
-                        // Afternoon Present Dataset
-                        {
-                            label: 'Afternoon Present',
-                            data: afternoonPresentData,
-                            backgroundColor: '#1cc88a', // Green for afternoon present
-                            borderColor: '#1cc88a',
-                            borderWidth: 1,
-                            barPercentage: 0.35, // Adjust the width for the afternoon bars
-                            categoryPercentage: 0.8,
-                            stack: 'afternoon'
-                        },
-                        {
-                            label: 'Afternoon Absent',
-                            data: afternoonAbsentData,
-                            backgroundColor: '#f6c23e', // Yellow for afternoon absent
-                            borderColor: '#f6c23e',
-                            borderWidth: 1,
-                            barPercentage: 0.35,
-                            categoryPercentage: 0.8,
-                            stack: 'afternoon'
-                        }
-                    ]
+    var ctx = document.getElementById('attendanceChart').getContext('2d');
+    var attendanceChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Present',
+                    data: morningPresentData,
+                    backgroundColor: '#1cc88a',
+                    borderColor: '#1cc88a',
+                    borderWidth: 1,
+                    barPercentage: 0.6,
+                    categoryPercentage: 0.7 
                 },
-                options: {
-                    responsive: true,
-                    scales: {
-                        x: {
-                            stacked: true, // Stack bars for morning and afternoon separately
-                            barPercentage: 0.8,
-                        },
-                        y: {
-                            beginAtZero: true,
-                            stacked: true // Stack the bars vertically
-                        }
-                    }
+                {
+                    label: 'Absent',
+                    data: morningAbsentData,
+                    backgroundColor: '#e74a3b',
+                    borderColor: '#e74a3b',
+                    borderWidth: 1,
+                    barPercentage: 0.6,
+                    categoryPercentage: 0.7
                 }
-            });
-
-
-            // Class Attendance Distribution Pie Chart Data
-            var classPieChart = document.getElementById('classPieChart').getContext('2d');
-            var myClassPieChart = new Chart(classPieChart, {
-                type: 'pie',
-                data: {
-                    labels: ['Class A', 'Class B', 'Class C', 'Class D'],
-                    datasets: [{
-                        data: [30, 40, 20, 10],
-                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
-                    }]
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    stacked: false // ❌ Do NOT stack so they appear side-by-side
+                },
+                y: {
+                    beginAtZero: true,
+                    stacked: false
                 }
-            });
+            }
+        }
+    });
+
+          // Class Attendance Distribution Doughnut Chart
+var classPieChart = document.getElementById('classPieChart').getContext('2d');
+var myClassPieChart = new Chart(classPieChart, {
+    type: 'doughnut',
+    data: {
+        labels: ['Class A', 'Class B', 'Class C', 'Class D'],
+        datasets: [{
+            data: [30, 40, 20, 10],
+            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        cutout: '60%', // Creates the hole in the middle
+        plugins: {
+            legend: {
+                position: 'top', // Move legend to the top
+                labels: {
+                    boxWidth: 20,
+                    padding: 10
+                }
+            },
+            tooltip: {
+                enabled: true
+            }
+        }
+    }
+});
+
         </script>
     </body>
 

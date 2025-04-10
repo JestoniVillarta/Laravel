@@ -184,7 +184,7 @@
         <div class="nav flex-column gap-3">
             <!-- Dashboard -->
             <a href="{{ route('admin.dashboard') }}"
-   class="nav-link {{ request()->is('admin/dashboard') ? 'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }} d-flex align-items-center">
+   class="nav-link {{ request()->is('admin/dashboard') ? 'bg-dark-subtle text-black fw-bold rounded-3' : 'fw-bold text-black' }} d-flex align-items-center">
    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
        class="sidebar-icon" viewBox="0 0 16 16">
        <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708z" />
@@ -196,7 +196,7 @@
 
             <!-- Attendance -->
             <a href="{{ route('admin.attendance') }}"
-                class="nav-link {{ request()->is('admin/attendance') ? 'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }} d-flex align-items-center ">
+                class="nav-link {{ request()->is('admin/attendance') ? 'bg-dark-subtle text-black fw-bold rounded-3' : 'fw-bold text-black' }} d-flex align-items-center ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" class="sidebar-icon">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -207,7 +207,7 @@
 
             <!-- Students List -->
             <a href="{{ route('admin.studentsList') }}"
-                class="nav-link {{ request()->is('admin/studentsList') ?  'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }} d-flex align-items-center">
+                class="nav-link {{ request()->is('admin/studentsList') ?  'bg-dark-subtle text-black fw-bold rounded-3' : 'fw-bold text-black' }} d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" class="sidebar-icon">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -219,7 +219,7 @@
 
             <!-- Set Time -->
             <a href="{{ route('admin.set_time') }}"
-                class="nav-link {{ request()->is('admin/set_time') ? 'bg-dark-subtle text-black fw-bold rounded-3 border-start border-5 border-end border-dark' : 'fw-bold text-black' }} d-flex align-items-center">
+                class="nav-link {{ request()->is('admin/set_time') ? 'bg-dark-subtle text-black fw-bold rounded-3' : 'fw-bold text-black' }} d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor" class="sidebar-icon">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

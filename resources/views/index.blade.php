@@ -4,61 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Attendance</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap 5 CSS CDN -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    
     <style>
         .hidden {
             display: none;
         }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-light">
 
-<div class="container mx-auto mt-10">
+<div class="container mt-5">
 
-    <h1 class="text-3xl font-bold mb-5 text-center">TRAINEE ATTENDANCE SYSTEM</h1>
+    <h1 class="text-center mb-4 fw-bold">TRAINEE ATTENDANCE SYSTEM</h1>
 
-    <form action="{{ route('attendance') }}" method="POST" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+    <form action="{{ route('attendance') }}" method="POST" class="mx-auto bg-white p-4 rounded shadow-sm" style="max-width: 600px;">
         @csrf
 
-        <input type="text" id="student_id" name="student_id" placeholder="ENTER YOUR ID:" required class="w-full p-3 mb-4 border rounded">
+        <div class="mb-3">
+            <input type="text" id="student_id" name="student_id" placeholder="ENTER YOUR ID:" required class="form-control">
+        </div>
 
         @if(session('error'))
-            <div class="bg-red-500 text-white p-3 mb-4 rounded">
+            <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
         @endif
 
         @if(session('success'))
-            <div class="bg-green-500 text-white p-3 mb-4 rounded">
+            <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
-        
-        <div class="flex justify-center gap-4">
+
+        <div class="d-flex justify-content-center gap-2 flex-wrap">
 
             @if ($show_morning_in)
-                <button type="submit" name="morning_in" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Morning Time In</button>
+                <button type="submit" name="morning_in" class="btn btn-success">Morning Time In</button>
             @endif
 
             @if ($show_morning_out)
-                <button type="submit" name="morning_out" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Morning Time Out</button>
+                <button type="submit" name="morning_out" class="btn btn-danger">Morning Time Out</button>
             @endif
 
             @if ($show_afternoon_in)
-                <button type="submit" name="afternoon_in" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Afternoon Time In</button>
+                <button type="submit" name="afternoon_in" class="btn btn-success">Afternoon Time In</button>
             @endif
 
             @if ($show_afternoon_out)
-                <button type="submit" name="afternoon_out" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Afternoon Time Out</button>
+                <button type="submit" name="afternoon_out" class="btn btn-danger">Afternoon Time Out</button>
             @endif
-    
+
         </div>
     </form>
 
 </div>
 
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-    // Check if any buttons are visible and disable the input if none are
     document.addEventListener('DOMContentLoaded', function() {
         const buttons = document.querySelectorAll('button');
         const inputField = document.getElementById('student_id');

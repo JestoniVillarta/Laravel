@@ -127,17 +127,17 @@
                      <thead class="table-dark">
                        
                             <tr>
-                                <th class="text-center">Student ID</th>
-                                <th class="text-center">Name</th>
-                                <th class="text-center">Gender</th>
-                                <th class="text-center">Date</th>
-                                <th class="text-center">Morning In</th>
-                                <th class="text-center">Morning Out</th>
-                                <th class="text-center">Afternoon In</th>
-                                <th class="text-center">Afternoon Out</th>
-                                <th class="text-center">Total Duty Hours</th>
-                                <th class="text-center">Morning Status</th>
-                                <th class="text-center">Afternoon Status</th>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Date</th>
+                                <th>Morning In</th>
+                                <th>Morning Out</th>
+                                <th>Afternoon In</th>
+                                <th>Afternoon Out</th>
+                                <th>Total Duty Hours</th>
+                                <th>Morning Status</th>
+                                <th>Afternoon Status</th>
                             </tr>
                         </thead>
                         <tbody>

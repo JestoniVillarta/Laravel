@@ -17,10 +17,9 @@ class DashboardController extends Controller
     $today = Carbon::now()->toDateString();
     $currentMonth = Carbon::now()->month;
 
-    $presentMorning = Attendance::whereDate('created_at', $today)->where('morning_status', 'Present')->count();
-    $presentAfternoon = Attendance::whereDate('created_at', $today)->where('afternoon_status', 'Present')->count();
-    $absentMorning = Attendance::whereDate('created_at', $today)->where('morning_status', 'Absent')->count();
-    $absentAfternoon = Attendance::whereDate('created_at', $today)->where('afternoon_status', 'Absent')->count();
+    $present = Attendance::whereDate('created_at', $today)->where('morning_status', 'Present')->count();
+
+    $absent = Attendance::whereDate('created_at', $today)->where('morning_status', 'Absent')->count();
 
     $presentStudents = Attendance::whereMonth('created_at', $currentMonth)
                                   ->where(function ($query) {
@@ -69,10 +68,8 @@ class DashboardController extends Controller
     }
 
     return view('admin.dashboard', compact(
-        'presentMorning',
-        'presentAfternoon',
-        'absentMorning',
-        'absentAfternoon',
+        'present',
+        'absent',
         'totalStudents',
         'attendanceRate',
         'dates',
