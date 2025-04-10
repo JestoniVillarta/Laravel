@@ -96,6 +96,36 @@
     background-color: #0056b3;  /* New hover background color */
     color: white;               /* Change text color on hover */
 }
+
+
+/* Add these styles to your existing stylesheet */
+.form-select {
+    display: block;
+    width: auto;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    appearance: none;
+}
+
+.form-select:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.me-2 {
+    margin-right: 0.5rem;
+}
     </style>
 
     <body>
@@ -124,7 +154,7 @@
                                         {{ $present }}
                                     </div>
                                 </div>
-                             
+
                             </div>
                         </div>
                     </div>
@@ -143,7 +173,7 @@
                                     {{ $absent }}
                                     </div>
                                 </div>
-                    
+
                             </div>
                         </div>
                     </div>
@@ -209,30 +239,19 @@
                 <!-- Attendance Chart -->
                 <div class="col-xl-8 col-lg-7">
                     <div class="card shadow mb-4">
+
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 
                             <h6 class="m-0 font-weight-bold text-primary">
                                 Attendance Overview (Morning and Afternoon)
                             </h6>
 
-                            <form action="{{ route('admin.dashboard') }}" method="GET" class="mb-3 w-50">
-                                <div class="form-group d-flex align-items-center justify-content-end gap-1">
-                                    <label for="filter">Select Filter:</label>
-                                    <div class="dropdown">
-                                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-
-                                            {{ $filter == 'weekly' ? 'Last 7 Days' : 'This Month' }}
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-                                            <li><a class="dropdown-item"
-                                                    href="{{ route('admin.dashboard', ['filter' => 'weekly']) }}">Last 7
-                                                    Days</a></li>
-                                            <li><a class="dropdown-item"
-                                                    href="{{ route('admin.dashboard', ['filter' => 'monthly']) }}">This
-                                                    Month</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                            <form action="{{ route('admin.dashboard') }}" method="GET" class="d-flex align-items-center">
+                                <label for="filter" class="me-2">Select Filter:</label>
+                                <select id="filter" name="filter" class="form-select form-select-sm" onchange="this.form.submit()">
+                                    <option value="weekly" {{ $filter == 'weekly' ? 'selected' : '' }}>Last 7 Days</option>
+                                    <option value="monthly" {{ $filter == 'monthly' ? 'selected' : '' }}>This Month</option>
+                                </select>
                             </form>
 
 
@@ -327,7 +346,7 @@
                     borderColor: '#1cc88a',
                     borderWidth: 1,
                     barPercentage: 0.6,
-                    categoryPercentage: 0.7 
+                    categoryPercentage: 0.7
                 },
                 {
                     label: 'Absent',
