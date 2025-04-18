@@ -92,25 +92,39 @@ class StudentController extends Controller
 
 
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'student_id' => 'required|unique:student_tbl,student_id,' . $id, // Ignore current student ID
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'gender' => 'required',
-            'contact' => 'required',
-            'address' => 'required',
+{
+    // Validation rules for updating
+    $request->validate([
+        'student_id' => 'required|unique:student_tbl,student_id,' . $id, // Ensures uniqueness except the current student ID
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'gender' => 'required',
+        'contact' => 'required',
+        'address' => 'required',
+    ]);
+
+    try {
+        // Find the student by ID
+        $student = Student::findOrFail($id);
+
+        // Update the student record
+        $student->update($request->all());
+
+        // Return success response for AJAX
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Student updated successfully!',
         ]);
-
-        try {
-            $student = Student::findOrFail($id);
-            $student->update($request->all());
-
-            return redirect()->back()->with('success', 'Student updated successfully!');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Student ID already exists or update failed!');
-        }
+    } catch (\Exception $e) {
+        // Return error response for AJAX
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Student ID already exists or update failed!',
+        ], 400); // Optional: 400 for bad request
     }
+}
+
+
 
 
 

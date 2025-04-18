@@ -1,7 +1,6 @@
 <x-navigation>
-
-    @include('components.student-add-modal')
     @include('components.student-edit-modal')
+    @include('components.student-add-modal')
 
     <!DOCTYPE html>
     <html lang="en">
@@ -12,6 +11,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Student List</title>
         <!-- Bootstrap CSS -->
+        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
     </head>
 
     <style>
@@ -20,31 +21,23 @@
             margin: 0 auto;
             margin-top: 3rem;
             padding: 1.5rem;
-
         }
 
         .table-container {
-
             overflow-y: auto;
             max-height: 75vh;
-
         }
 
-
-
         thead {
-
             position: sticky;
             top: 0;
             z-index: 1000;
             background-color: #343a40;
             height: 3.5rem;
-
         }
 
         td {
             height: 4.5rem;
-
         }
 
         .dropdown-item {
@@ -53,12 +46,10 @@
 
         /* Edit item styles */
         .edit-item {
-
             color: #007bff;
         }
 
         .edit-item svg {
-
             color: #007bff;
         }
 
@@ -132,7 +123,9 @@
                         <input type="text" id="searchInput" class="form-control" placeholder="Search by ID or Name" autocomplete="off">
                     </div>
 
-                    <button onclick="openAddStudentModal()" class="btn btn-primary d-flex align-items-center justify-content-center w-50 gap-1">
+
+
+                    <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center w-50 gap-1" data-bs-toggle="modal" data-bs-target="#addStudentModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users-plus">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
@@ -146,11 +139,14 @@
                 </div>
             </div>
 
+
+
+
+
             <!-- Student List Table -->
             <div class="table-container">
                 <table class="table border-2  ">
                     <thead class="table-dark">
-
                         <tr >
                             <th style="border-top-left-radius: 10px">Student ID</th>
                             <th>Full Name</th>
@@ -175,7 +171,7 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a class="dropdown-item edit-item" href="javascript:void(0);" onclick="openModal('{{ $student->id }}')">
+                                            <a class="dropdown-item edit-item btn" data-bs-toggle="modal" data-bs-target="#editModal-{{ $student->id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
@@ -201,7 +197,6 @@
                                             </a>
                                         </li>
                                     </ul>
-
                                 </div>
                             </td>
                         </tr>
@@ -211,9 +206,7 @@
             </div>
         </div>
 
-        <!-- Bootstrap Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
 
         <script>
             document.getElementById("genderFilter").addEventListener("change", function() {
@@ -242,5 +235,4 @@
     </body>
 
     </html>
-
 </x-navigation>

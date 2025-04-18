@@ -9,6 +9,7 @@ use App\Http\Controllers\TimeController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\StudentRecordsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\rankingController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware('guest:admin')->group(function () {
@@ -51,11 +52,12 @@ Route::get('student-records/{student_id}', [ StudentRecordsController::class, 's
 // Route to update the student
 Route::get('{id}/edit', [StudentController::class,'edit']);
 
-Route::put('{id}/edit', [\App\Http\Controllers\StudentController::class, 'update']);
+Route::put('{id}/edit', [StudentController::class, 'update']);
 
-Route::get('/{id}/delete', [\App\Http\Controllers\StudentController::class, 'destroy']);
+Route::get('/{id}/delete', [StudentController::class, 'destroy']);
 
-Route::post('update/{id}', [StudentController::class, 'updateStudent'])->name('students.update');
+Route::put('/students/{id}', [StudentController::class, 'update'])->name('students.update');
+
 
 
 
@@ -64,6 +66,10 @@ Route::get('set_time', [TimeController::class, 'showForm'])->name('admin.set_tim
 Route::post('admin.set_time', [TimeController::class, 'setAttendanceTime'])->name('attendance.set-time');
 
 Route::get('attendance/search', [AttendanceController::class, 'searchAttendance'])->name('attendance.search');
+
+
+Route::get('/ranking', [rankingController::class, 'studentsRanking'])->name('admin.ranking');
+
 
 
     Route::post('logout', [LoginController::class, 'destroy'])->name('admin.logout');

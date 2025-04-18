@@ -228,6 +228,18 @@
                 </svg>
                 <span class="ms-3 sidebar-label d-flex align-items-center">Set Time</span>
             </a>
+
+                 <!-- ranking -->
+                 <a href="{{ route('admin.ranking') }}"
+                 class="nav-link {{ request()->is('admin/ranking') ? 'bg-dark-subtle text-black fw-bold rounded-3' : 'fw-bold text-black' }} d-flex align-items-center">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                     viewBox="0 0 24 24" stroke="currentColor" class="sidebar-icon">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                         d="M12 8v4l3 3m5-3a9 9 0 11-6.32-8.94"></path>
+                 </svg>
+                 <span class="ms-3 sidebar-label d-flex align-items-center">Ranking</span>
+             </a>
+
         </div>
     </div>
 
