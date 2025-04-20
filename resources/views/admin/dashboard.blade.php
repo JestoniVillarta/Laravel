@@ -15,7 +15,6 @@
         * {
             font-family: "Gill Sans", sans-serif;
             font-size: 15px;
-
         }
 
         .dashboard-container {
@@ -81,6 +80,7 @@
 
         .card-body {
             padding: 1rem;
+            width: 100%;
         }
 
         .card-title {
@@ -94,13 +94,9 @@
 
         .btn-secondary:hover {
             background-color: #0056b3;
-            /* New hover background color */
             color: white;
-            /* Change text color on hover */
         }
 
-
-        /* Add these styles to your existing stylesheet */
         .form-select {
             display: block;
             width: auto;
@@ -128,6 +124,42 @@
         .me-2 {
             margin-right: 0.5rem;
         }
+
+        .attendance-rate-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .chart-container {
+        position: relative;
+        width: 250px;  /* Increase width */
+        height: 250px; /* Increase height */
+    }
+
+    #circularAttendanceChart {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .attendance-rate-value {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .attendance-rate-label {
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1rem;
+        color: #666;
+    }
     </style>
 
     <body>
@@ -141,10 +173,10 @@
                 </a>
             </div>
 
-            <!-- Content Row for the 4 Boxes -->
+            <!-- Content Row for the 3 Boxes (removed Monthly Attendance Rate Card) -->
             <div class="row mt-4">
                 <!-- Present Today Card -->
-                <div class="col-xl-3 col-md-6 mb-4">
+                <div class="col-xl-4 col-md-6 mb-4">
                     <div class="card border-left-success card-stat shadow h-100 py-2">
                         <div class="card-body">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
@@ -158,7 +190,7 @@
                 </div>
 
                 <!-- Absent Today Card -->
-                <div class="col-xl-3 col-md-6 mb-4">
+                <div class="col-xl-4 col-md-6 mb-4">
                     <div class="card border-left-danger card-stat shadow h-100 py-2">
                         <div class="card-body">
                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
@@ -172,7 +204,7 @@
                 </div>
 
                 <!-- Total Students Card -->
-                <div class="col-xl-3 col-md-6 mb-4">
+                <div class="col-xl-4 col-md-6 mb-4">
                     <div class="card shadow h-100 py-2 card-stat border-left-warning">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
@@ -186,38 +218,6 @@
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-clock fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Monthly Attendance Rate Card -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card shadow h-100 py-2 card-stat border-left-success">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col me-2">
-                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                        Monthly Attendance Rate
-                                    </div>
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col-auto">
-                                            <div class="h5 mb-0 me-3 font-weight-bold text-gray-800">
-                                                {{ number_format($attendanceRate, 2) }}%
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="progress progress-sm me-2">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                    style="width: <?php echo e($attendanceRate); ?>%">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
                                 </div>
                             </div>
                         </div>
@@ -247,36 +247,26 @@
                             </form>
                         </div>
                         <div class="card-body">
-                            <div class="chart-area">
+                            <div class="chart-area" >
                                 <canvas id="attendanceChart" style="width: 100%; height: 300px;"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Class Attendance Distribution Pie Chart -->
+                <!-- Circular Attendance Rate Chart (smaller size) -->
                 <div class="col-xl-4 col-lg-5">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Class Attendance Distribution</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Monthly Attendance Rate</h6>
                         </div>
                         <div class="card-body">
-                            <div class="chart-pie">
-                                <canvas id="classPieChart" style="width: 100%; height: 250px;"></canvas>
-                            </div>
-                            <div class="mt-4 text-center small">
-                                <span class="me-2">
-                                    <i class="fas fa-circle text-primary"></i> Class A
-                                </span>
-                                <span class="me-2">
-                                    <i class="fas fa-circle text-success"></i> Class B
-                                </span>
-                                <span class="me-2">
-                                    <i class="fas fa-circle text-info"></i> Class C
-                                </span>
-                                <span class="me-2">
-                                    <i class="fas fa-circle text-warning"></i> Class D
-                                </span>
+                            <div class="attendance-rate-container">
+                                <div class="chart-container">
+                                    <canvas id="circularAttendanceChart"></canvas>
+                                    <div class="attendance-rate-value">{{ number_format($attendanceRate, 1) }}%</div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -289,6 +279,7 @@
             var labels = {!! json_encode($dates) !!};
             var presentData = {!! json_encode($presentData) !!};
             var absentData = {!! json_encode($absentData) !!};
+            var attendanceRate = {{ $attendanceRate }};
 
             var ctx = document.getElementById('attendanceChart').getContext('2d');
             var attendanceChart = new Chart(ctx, {
@@ -297,7 +288,7 @@
                     labels: labels,
                     datasets: [{
                             label: 'Present',
-                            data: presentData, // Use the original data
+                            data: presentData,
                             backgroundColor: '#1cc88a',
                             borderColor: '#1cc88a',
                             borderWidth: 1,
@@ -312,7 +303,7 @@
                         },
                         {
                             label: 'Absent',
-                            data: absentData, // Use the original data
+                            data: absentData,
                             backgroundColor: '#e74a3b',
                             borderColor: '#e74a3b',
                             borderWidth: 1,
@@ -329,46 +320,88 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            left: 0,
+                            right: 0,
+                            top: 10,
+                            bottom: 0
+                        }
+                    },
                     scales: {
                         x: {
-                            stacked: false // Keep bars side-by-side
+                            stacked: false
                         },
                         y: {
                             beginAtZero: true,
                             stacked: false
                         }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            align: 'center',
+                            labels: {
+                                boxWidth: 20,
+                                padding: 15
+                            }
+                        }
                     }
                 }
             });
 
-            // Class Attendance Distribution Doughnut Chart
-            var classPieChart = document.getElementById('classPieChart').getContext('2d');
-            var myClassPieChart = new Chart(classPieChart, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Class A', 'Class B', 'Class C', 'Class D'],
-                    datasets: [{
-                        data: [30, 40, 20, 10],
-                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    cutout: '60%', // Creates the hole in the middle
-                    plugins: {
-                        legend: {
-                            position: 'top', // Move legend to the top
-                            labels: {
-                                boxWidth: 20,
-                                padding: 10
-                            }
-                        },
-                        tooltip: {
-                            enabled: true
-                        }
-                    }
-                }
+            // Circular Attendance Rate Chart (smaller size)
+            var circleCtx = document.getElementById('circularAttendanceChart').getContext('2d');
+var circularAttendanceChart = new Chart(circleCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Attendance Rate'],
+        datasets: [
+            // Background full ring (gray)
+            {
+                data: [100],
+                backgroundColor: ['#eaecf4'],
+                borderWidth: 0,
+                cutout: '80%',
+            },
+            // Foreground (green) partial arc
+            {
+                data: [attendanceRate],
+                backgroundColor: ['#1cc88a'],
+                borderWidth: 0,
+                borderRadius: 10, // 👈 Rounded end only here
+                circumference: (attendanceRate / 100) * 360,
+
+                cutout: '80%'
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                enabled: false
+            }
+        }
+    }
+});
+
+
+            // Position the percentage text in the center of the doughnut
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('.attendance-rate-value').style.position = 'absolute';
+                document.querySelector('.attendance-rate-value').style.top = '50%';
+                document.querySelector('.attendance-rate-value').style.left = '50%';
+                document.querySelector('.attendance-rate-value').style.transform = 'translate(-50%, -50%)';
+                document.querySelector('.attendance-rate-label').style.position = 'absolute';
+                document.querySelector('.attendance-rate-label').style.top = '65%';
+                document.querySelector('.attendance-rate-label').style.left = '50%';
+                document.querySelector('.attendance-rate-label').style.transform = 'translate(-50%, 0)';
             });
         </script>
     </body>
