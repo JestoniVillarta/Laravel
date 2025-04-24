@@ -72,5 +72,7 @@ Route::get('/ranking', [rankingController::class, 'studentsRanking'])->name('adm
 
 
 
+
+
     Route::post('logout', [LoginController::class, 'destroy'])->name('admin.logout');
 });
