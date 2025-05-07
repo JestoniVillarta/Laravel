@@ -26,7 +26,7 @@
         }
 
         .card-stat {
-            border-bottom: 6px solid;
+            border-bottom: 20px solid;
             border-radius: 4px;
         }
 
@@ -62,9 +62,6 @@
             padding: 1rem;
         }
 
-        .border-left-primary {
-            border-bottom-color: #4e73df;
-        }
 
         .border-left-success {
             border-bottom-color: #1cc88a;

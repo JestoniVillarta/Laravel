@@ -11,6 +11,7 @@ use App\Http\Controllers\StudentRecordsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\rankingController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\reportsController;
 
 Route::prefix('admin')->middleware('guest:admin')->group(function () {
 
@@ -69,6 +70,9 @@ Route::get('attendance/search', [AttendanceController::class, 'searchAttendance'
 
 
 Route::get('/ranking', [rankingController::class, 'studentsRanking'])->name('admin.ranking');
+
+
+Route::get('/reports', [reportsController::class, 'index'])->name('admin.reports');
 
 
 
