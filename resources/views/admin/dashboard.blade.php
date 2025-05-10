@@ -165,9 +165,7 @@
             <!-- Dashboard Header -->
             <div class="d-sm-flex align-items-center justify-content-between">
                 <h2>Attendance Dashboard</h2>
-                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                    <i class="fas fa-download fa-sm text-white-50 me-1"></i> Generate Report
-                </a>
+             
             </div>
 
             <!-- Content Row for the 3 Boxes (removed Monthly Attendance Rate Card) -->
